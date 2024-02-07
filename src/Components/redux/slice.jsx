@@ -15,7 +15,6 @@ export const dataSlice = createSlice({
   initialState,
   reducers: {
     allProducts: (state, action) => {
-      // console.log(action.payload, "reducer articulos");
       state.allProduct = action.payload;
       state.copyallProducts = action.payload;
     },
@@ -42,7 +41,7 @@ export const dataSlice = createSlice({
     },
   },
 });
-
+//   console.log(response.data.data.attributes.comercio.data.id, " esto es lo que trae el response de todos los arituclos");
 //-------------------------------------------------------------------------------------------------------------------
 //------------------------------------------ function Movies ------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------
@@ -54,7 +53,7 @@ export const asyncAllProducts = () => {
   return async function (dispatch) {
     try {
       const response = await axios.get(API_STRAPI_ARTICTULOS);
-      console.log(response.data.data,"todo lo que trae de articulos");
+      console.log(response.data.data, "asyncallproducts");
       return dispatch(allProducts(response.data.data));
     } catch (error) {
       console.error("Error fetching data:", error);

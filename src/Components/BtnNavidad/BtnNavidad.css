@@ -8,8 +8,7 @@
     background-color: white;
     font-weight: 500;
     border-bottom:whitesmoke 2px solid;
-    justify-content: space-between;
-  
+    justify-content: center;
 }
 .btnMasInfo{
     border: none;

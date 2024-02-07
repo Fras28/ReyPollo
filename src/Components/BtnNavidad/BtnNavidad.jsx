@@ -6,6 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
+import Logo from "../assets/LogoCoqui.png"
 import "./BtnNavidad.css";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -51,24 +52,18 @@ export default function AlertDialogSlide() {
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle className="infoNavi">
-          SOMOS MORTON SOLUCIONES{" "}
+          <div>
+         <img src={Logo} alt="logo Coqui Cakes" width="100px" />
+          </div>
+          <div style={{marginLeft:"30%"}}>
           <button className="exit" onClick={handleClose}>
             x
           </button>
+          </div>
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            ¿Te gustaría revolucionar la experiencia de tus clientes en tu
-            comercio? ¡Con nuestra App, es posible! Nuestra herramienta fue
-            creada con el objetivo de mejorar y agilizar la atención al cliente.
-            ¿Cómo lo hacemos? Al ofrecer la posibilidad de ver la carta y hacer
-            el pedido y el pago a través de la App, tus clientes podrán tomar su
-            decisión de manera más rápida y cómoda, sin tener que esperar a que
-            un mesero se acerque a ellos. Además, al reducir el tiempo que tus
-            clientes pasan ocupando la mesa sin consumir, podrás aumentar la
-            rotación de clientes y, por ende, las ganancias de tu negocio. ¡No
-            esperes más y conviértete en el dueño de un negocio más moderno y
-            eficiente gracias a nuestra App!
+          ¡Bienvenido a Coqui Cakes, donde cada torta es una obra maestra de sabor y cariño! En nuestro encantador catálogo, descubrirás las más deliciosas creaciones elaboradas con ingredientes de primera calidad y el toque mágico de amor que dedicamos a cada mezcla. ¡Esperamos que disfrutes de nuestras tortas tanto como nosotros disfrutamos preparándolas para ti! Elige la que más te guste y envíanos tu pedido. ¡Haz que cada ocasión sea aún más dulce con Coqui Cakes! 🍰💖
           </DialogContentText>
         </DialogContent>
         <DialogActions> </DialogActions>

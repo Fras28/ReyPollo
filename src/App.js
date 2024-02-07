@@ -17,13 +17,7 @@ function App() {
     <div className="App">
 <Switch>
           <Route exact path="/:id?" component={Inicio}/>
-          <Route exact path="/:id/Landing" component={Landing}/>
-          <Route exact path="/:id/Landing/Cafeteria" component={Cafeteria}/>
-          <Route exact path="/:id/Landing/Comidas" component={Comidas}/>
-          <Route exact path="/:id/Landing/Bebidas" component={Bebidas}/>
-          <Route exact path="/:id/Bag" component={Bag}/>
-          <Route exact path="/:id/Landing/SpecialEvent" component={SpecialEvent}/>
-          <Route exact path="/:id/Landing/TrackClub" component={TrackClub}/>
+          <Route exact path="/:id/Landing" component={Cafeteria}/>
 </Switch>
   <Foot/>
   <MyFoot/>

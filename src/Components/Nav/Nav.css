@@ -15,10 +15,11 @@ h1{
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: white;
+  background-color: #FFE8C9;
   z-index: 9999;
   justify-content: space-evenly;
   padding-bottom: 2%;
+  border-bottom:  1px solid #FDAB97;
 }
   /*============= Search bar ==========*/
 .back{
@@ -38,6 +39,7 @@ h1{
 }
 .morton{
   margin-top: 20px;
+
 }
 .backLink{
   display: none;
@@ -58,7 +60,7 @@ h1{
 
   }
   .morton{
-    margin-left: 31%;}
+    margin:auto}
     .bakBagBtn{
       display: block;
     }
