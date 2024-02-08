@@ -5,7 +5,7 @@ import { Nav } from "../Nav/Nav.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncAllProducts } from "../redux/slice.jsx";
 import { VerPedido } from "../BtnBag/BtnBag.jsx";
-
+import oreo from "../assets/oreo.jpg"
 import publi from "../assets/cafPast.jpg";
 
 export const Cafeteria = (id) => {
@@ -85,7 +85,7 @@ export const Cafeteria = (id) => {
         <div className="conteinerLB2 animate__animated  animate__zoomIn animate__faster">
           {X1[0] ? (
             <>
-              <img src={publi} alt="promo" id="1" />
+              <img src="https://i0.wp.com/adrianacotte.com/wp-content/uploads/2019/07/BLOG_00-1.jpg?fit=750%2C600&ssl=1" alt="promo" id="1"/>
               <Cards products={X1} />
             </>
           ) : null}
@@ -103,7 +103,7 @@ export const Cafeteria = (id) => {
           {X3 ? (
             <>
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-TipnrNFLzeSVvyG2DcXvmn6PhuPB-jK4-g&usqp=CAU"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4YRaEgOy_STk3Kykcd2wQl20kd_6rb0zsk2Qx64BceqS-CNK_8B0yBIJecBIFndtYcWY&usqp=CAU"
                 alt="promo"
                 id="3"
               />
@@ -147,7 +147,7 @@ export const Cafeteria = (id) => {
           {X7[0] ? (
             <>
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-TipnrNFLzeSVvyG2DcXvmn6PhuPB-jK4-g&usqp=CAU"
+                src="https://acdn.mitiendanube.com/stores/413/750/products/20200911_1414281-907801586675d4fd5c15998448698354-640-0.jpg"
                 alt="promo"
                 id="7"
               />
