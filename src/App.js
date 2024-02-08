@@ -18,6 +18,7 @@ function App() {
 <Switch>
           <Route exact path="/:id?" component={Inicio}/>
           <Route exact path="/:id/Landing" component={Cafeteria}/>
+          <Route exact path="/:id/bag" component={Bag}/>
 </Switch>
   <Foot/>
   <MyFoot/>

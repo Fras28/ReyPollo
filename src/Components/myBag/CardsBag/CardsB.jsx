@@ -8,7 +8,7 @@ import "./CardsB.css";
 
 export const CardsBag = ({ products }) => {
   let { favProd } = useSelector((state) => state.alldata);
-  const valores = favProd.map((e) => parseInt(e.price, 10));
+  const valores = favProd.map((e) => parseInt(e.attributes.price, 10));
   let total = valores.reduce((a, b) => a + b, 0);
 
   return (
