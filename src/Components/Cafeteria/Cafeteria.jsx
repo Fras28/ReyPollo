@@ -7,6 +7,8 @@ import { asyncAllProducts } from "../redux/slice.jsx";
 import { VerPedido } from "../BtnBag/BtnBag.jsx";
 import oreo from "../assets/oreo.jpg"
 import publi from "../assets/cafPast.jpg";
+import Spinner from "../assets/Spinner/Spinner.jsx";
+import Logo from "../assets/LogoCoqui.png"
 
 export const Cafeteria = (id) => {
   const mesa = id.match.url.slice(1, 3);
@@ -156,6 +158,7 @@ export const Cafeteria = (id) => {
             </>
           ) : null}
         </div>
+       {soloEsteComercio.length === 0? <Spinner imageUrl={Logo}/>:null} 
       </div>
       <VerPedido id={mesa} />
     </div>
