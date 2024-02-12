@@ -38,10 +38,11 @@ export const Cafeteria = (id) => {
   );
 
   const CafeteriaProducts = soloEsteComercio?.filter(
-    (e) => e.attributes?.categorias?.data[0]?.id === 4
+    (e) => e.attributes?.categorias?.data.id === 4
   );
 
-  console.log(soloEsteComercio, " todos los productos de coqui cakes");
+  console.log(CafeteriaProducts
+  , " todos los productos de coqui cakes");
 
   const X1 = CafeteriaProducts?.filter(
     (e) => e.attributes?.sub_categoria?.data?.id === 9
