@@ -78,8 +78,9 @@ export const Cafeteria = (id) => {
       <div className="sectioner">
   {[X7, X6, X5, X4, X3, X2, X1].map((product, index) => (
     product[0] ? (
-      <a key={index} href={`#${index + 1}`}>
+      <a key={index} href={`#${product[0].attributes.sub_categoria.data.id}`} >
         {product[0]?.attributes.sub_categoria.data.attributes.name}
+        {console.log(product[0].attributes.sub_categoria.data.id, 'espero que apareza el numero de id')}
       </a>
     ) : null
   ))}
@@ -88,7 +89,7 @@ export const Cafeteria = (id) => {
         <div className="conteinerLB2 animate__animated  animate__zoomIn animate__faster">
           {X1[0] ? (
             <>
-              <img src="https://i0.wp.com/adrianacotte.com/wp-content/uploads/2019/07/BLOG_00-1.jpg?fit=750%2C600&ssl=1" alt="promo" id="1"/>
+              <img src="https://i0.wp.com/adrianacotte.com/wp-content/uploads/2019/07/BLOG_00-1.jpg?fit=750%2C600&ssl=1" alt="promo" id="9"/>
               <Cards products={X1} />
             </>
           ) : null}
@@ -98,7 +99,7 @@ export const Cafeteria = (id) => {
               <img
                 src="https://i.pinimg.com/originals/b5/57/59/b5575945f530d0f9b7d4ee4d470b63c6.jpg"
                 alt="promo"
-                id="2"
+                id="10"
               />
               <Cards products={X2} />
             </>
@@ -108,7 +109,7 @@ export const Cafeteria = (id) => {
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4YRaEgOy_STk3Kykcd2wQl20kd_6rb0zsk2Qx64BceqS-CNK_8B0yBIJecBIFndtYcWY&usqp=CAU"
                 alt="promo"
-                id="3"
+                id="11"
               />
               <Cards products={X3} />
             </>
@@ -119,7 +120,7 @@ export const Cafeteria = (id) => {
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-TipnrNFLzeSVvyG2DcXvmn6PhuPB-jK4-g&usqp=CAU"
                 alt="promo"
-                id="4"
+                id="12"
               />
               <Cards products={X4} />
             </>
@@ -130,7 +131,7 @@ export const Cafeteria = (id) => {
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-TipnrNFLzeSVvyG2DcXvmn6PhuPB-jK4-g&usqp=CAU"
                 alt="promo"
-                id="5"
+                id="13"
               />
               <Cards products={X5} />
             </>
@@ -142,7 +143,7 @@ export const Cafeteria = (id) => {
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-TipnrNFLzeSVvyG2DcXvmn6PhuPB-jK4-g&usqp=CAU"
                 alt="promo"
-                id="6"
+                id="14"
               />
               <Cards products={X6} /> aaa
             </>
@@ -152,7 +153,7 @@ export const Cafeteria = (id) => {
               <img
                 src="https://acdn.mitiendanube.com/stores/413/750/products/20200911_1414281-907801586675d4fd5c15998448698354-640-0.jpg"
                 alt="promo"
-                id="7"
+                id="15"
               />
               <Cards products={X7} />
             </>

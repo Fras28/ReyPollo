@@ -96,6 +96,7 @@
   gap: 1rem;
 }
 
+
 @media (max-width: 600px) {
   .btnEnter{
   margin-top: 6rem;
