@@ -6,7 +6,8 @@ const initialState = {
   allProduct: [],
   copyallProducts: [],
   favProd: [],
-  categorias:[]
+  categorias:[],
+  comercio:[],
 };
 
 
@@ -21,6 +22,9 @@ export const dataSlice = createSlice({
     allCategorias:(state, action) => {
       // console.log(action.payload, "reducer articulos");
       state.categorias = action.payload;
+    },
+    fillComercio:(state, action) => {
+      state.comercio = action.payload;
     },
     
     favProducts: (state, action) => {
@@ -47,16 +51,26 @@ export const dataSlice = createSlice({
 //----------------------------------------------------------------------------------------------------------------
 const API_STRAPI_ARTICTULOS = process.env.REACT_APP_API_STRAPI_ARTICTULOS;
 const API_CATEGORIAS = process.env.REACT_APP_API_STRAPI_CATEGORIAS;
+const API_COMERCIO = process.env.REACT_APP_API_STRAPI_COMERCIOS
 
 export const asyncAllProducts = () => {
-  console.log("All PRODUCTS SLICE");
   return async function (dispatch) {
     try {
       const response = await axios.get(API_STRAPI_ARTICTULOS);
-      console.log(response.data.data, "asyncallproducts");
       return dispatch(allProducts(response.data.data));
     } catch (error) {
       console.error("Error fetching data:", error);
+    }
+  };
+};
+export const asyncComercio = () => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(API_COMERCIO);
+      const idComercio = response?.data?.data.filter(e => e.id === 3);
+      return dispatch(fillComercio(idComercio[0].attributes));
+    } catch (error) {
+      console.error("Error fetching data comercio:", error);
     }
   };
 };
@@ -100,7 +114,7 @@ export const asyncOrder = (pedido)=>{
 
 //----------------------------------------------------------------------------------------------------------------
 
-export const { allProducts, favProducts, cancelBagProducts, SearchProducts, allCategorias } =
+export const { allProducts, favProducts, cancelBagProducts, SearchProducts, allCategorias, fillComercio } =
   dataSlice.actions;
 
 export default dataSlice.reducer;

@@ -1,11 +1,17 @@
 import React from "react";
 import "./Footer.css";
+import { useSelector } from "react-redux";
 
 export const Foot = () => {
+  const { comercio } = useSelector((state) => state.alldata);
+
+
+console.log(comercio);
+
   return (
     <footer className="footy animate__animated  animate__zoomIn">
       <div className="linkss">
-        <a className="links" href="http://wa.me/5429215729501?text=Hola me gusto la carta, quisiera tener mas informacion " Target="_blank">
+        <a className="links" href={`http://wa.me/${comercio?.whatsapp}?text=Hola me gusto la carta, quisiera tener mas informacion `} Target="_blank">
           <svg
             className="linkC"
             width="46"
@@ -22,7 +28,7 @@ export const Foot = () => {
           </svg>
         </a>
 
-        <a className="links" href="https://www.instagram.com/" Target="_blank">
+        <a className="links" href={comercio?.instagram} Target="_blank">
           <svg
             className="linkC"
             width="44"

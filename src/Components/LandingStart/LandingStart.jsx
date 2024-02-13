@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import AlertDialogSlide from "../BtnNavidad/BtnNavidad";
 import "./LandingStart.css";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncAllProducts, asyncCategorias } from "../redux/slice";
+import { asyncAllProducts, asyncCategorias, asyncComercio } from "../redux/slice";
 import { ButtonEnter } from "./ButtonEnter/ButtonEnter";
 
 
@@ -12,20 +12,22 @@ import { ButtonEnter } from "./ButtonEnter/ButtonEnter";
 export const Inicio = (url) => {
   const dispatch = useDispatch();
   const [animateOut, setAnimateOut] = useState(false);
-
+  
   useEffect(() => {
     const fetchData = () => {
       console.log("Effect is running");
+      dispatch(asyncComercio());
       dispatch(asyncAllProducts());
       dispatch(asyncCategorias());
     };
-
+    
     fetchData();
-
+    
     const intervalId = setInterval(fetchData, 15 * 60 * 1000);
-
+    
     return () => clearInterval(intervalId);
   }, [dispatch]);
+
 
   const toTop = () => {
     window.scrollTo(0, 0);

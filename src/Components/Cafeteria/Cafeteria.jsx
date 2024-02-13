@@ -5,7 +5,7 @@ import { Nav } from "../Nav/Nav.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncAllProducts } from "../redux/slice.jsx";
 import { VerPedido } from "../BtnBag/BtnBag.jsx";
-import oreo from "../assets/oreo.jpg"
+import oreo from "../assets/oreo1.jpg"
 import publi from "../assets/cafPast.jpg";
 import Spinner from "../assets/Spinner/Spinner.jsx";
 import Logo from "../assets/LogoCoqui.png"
@@ -89,7 +89,7 @@ export const Cafeteria = (id) => {
         <div className="conteinerLB2 animate__animated  animate__zoomIn animate__faster">
           {X1[0] ? (
             <>
-              <img src="https://i0.wp.com/adrianacotte.com/wp-content/uploads/2019/07/BLOG_00-1.jpg?fit=750%2C600&ssl=1" alt="promo" id="9"/>
+              <img src={oreo} alt="promo" id="9"/>
               <Cards products={X1} />
             </>
           ) : null}
