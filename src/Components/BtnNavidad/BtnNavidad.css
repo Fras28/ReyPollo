@@ -2,6 +2,7 @@
 .btnNav{
     height: 30px;
     color: black; 
+    margin-top: 12rem;
 }
 .infoNavi{
     display: flex;
