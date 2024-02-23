@@ -40,20 +40,20 @@ export const Cafeteria = (id) => {
   );
 
   const CafeteriaProducts = soloEsteComercio?.filter(
-    (e) => e.attributes?.categorias?.data.id === 4
-  );
+    (e) => e.attributes?.categorias?.data.id === 1
+    );
 
   console.log(CafeteriaProducts
   , " todos los productos de coqui cakes");
 
   const X1 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 9
+    (e) => e.attributes?.sub_categoria?.data?.id === 1
   );
   const X2 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 10
+    (e) => e.attributes?.sub_categoria?.data?.id === 2
   );
   const X3 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 11
+    (e) => e.attributes?.sub_categoria?.data?.id === 3
   );
   const X4 = CafeteriaProducts?.filter(
     (e) => e.attributes?.sub_categoria?.data?.id === 12

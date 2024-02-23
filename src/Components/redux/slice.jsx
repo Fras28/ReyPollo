@@ -57,6 +57,7 @@ export const asyncAllProducts = () => {
   return async function (dispatch) {
     try {
       const response = await axios.get(API_STRAPI_ARTICTULOS);
+
       return dispatch(allProducts(response.data.data));
     } catch (error) {
       console.error("Error fetching data:", error);
