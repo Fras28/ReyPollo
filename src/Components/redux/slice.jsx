@@ -69,8 +69,7 @@ export const asyncComercio = () => {
     try {
       const response = await axios.get(API_COMERCIO);
       console.log(response.data.data, "info comercio");
-      const idComercio = response?.data?.data.filter(e => e.id === 3);
-      return dispatch(fillComercio(idComercio[0].attributes));
+      return dispatch(fillComercio(response.data.data));
     } catch (error) {
       console.error("Error fetching data comercio:", error);
     }

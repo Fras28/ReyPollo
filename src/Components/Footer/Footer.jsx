@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Footer.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { asyncComercio } from "../redux/slice";
 
 export const Foot = () => {
+ 
   const { comercio } = useSelector((state) => state.alldata);
 
+console.log(comercio[0]?.attributes.whatsapp
+  , "info del comercio footer");
 
-console.log(comercio);
 
   return (
     <footer className="footy animate__animated  animate__zoomIn">
       <div className="linkss">
-        <a className="links" href={`http://wa.me/${comercio?.whatsapp}?text=Hola me gusto la carta, quisiera tener mas informacion `} Target="_blank">
+        <a className="links" href={`http://wa.me/${comercio[0]?.attributes.whatsapp} `} Target="_blank">
           <svg
             className="linkC"
             width="46"
@@ -28,7 +31,7 @@ console.log(comercio);
           </svg>
         </a>
 
-        <a className="links" href={comercio?.instagram} Target="_blank">
+        <a className="links" href={comercio[0]?.attributes.instagram} Target="_blank">
           <svg
             className="linkC"
             width="44"

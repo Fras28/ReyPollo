@@ -64,11 +64,17 @@
  margin:0 1rem 0 1rem
 }
 
+
 .naviTit2{
 display:flex ;
 font-weight: 600;
 color: whitesmoke;
 }
+.naviTit3{
+  display:flex ;
+  font-weight: 600;
+  color: black;
+  }
 .titCasa {
   display: flex;
 }

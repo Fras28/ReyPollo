@@ -99,7 +99,7 @@ export default function LandingPage(url) {
         >
           <path d="M59 0.999995L0 1" stroke="#E88A23" />
         </svg>
-        <p className="naviTit2"> Seguinos en </p>
+        <p className="naviTit3"> Seguinos en </p>
         <svg
           width="59"
           height="2"
