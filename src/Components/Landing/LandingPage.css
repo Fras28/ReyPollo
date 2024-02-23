@@ -48,6 +48,7 @@
   min-height: 100px;
   font-size: 1.3rem;  
   margin-bottom: 16px;
+  background-image: url("../assets/bgNav.png");
 }
 .navi2{
   display: flex;
@@ -66,6 +67,7 @@
 .naviTit2{
 display:flex ;
 font-weight: 600;
+color: whitesmoke;
 }
 .titCasa {
   display: flex;
@@ -110,9 +112,7 @@ font-weight: 800;
   gap: 7px;
   margin-bottom: 7px;
 }
-.logoL{
-margin-top: 16px;
-}
+
 
 
 .evImg{

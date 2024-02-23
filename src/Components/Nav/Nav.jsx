@@ -140,7 +140,7 @@ export const Nav = (id) => {
           </a>
         </Route>
         <div className="morton foolishIn">
-          <NavLink to={`/${id.id}`}>
+          <NavLink to={`/${id.id}/Landing`}>
          <img src={Logo} alt="logoCakes" width="100px" />
 
           </NavLink>

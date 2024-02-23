@@ -1,18 +1,24 @@
 import React, { useEffect } from "react";
 import { Cards } from "../Cards/Cards.jsx";
-import "./Cafeteria.css";
+import "./Polleria.css";
 import { Nav } from "../Nav/Nav.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncAllProducts } from "../redux/slice.jsx";
 import { VerPedido } from "../BtnBag/BtnBag.jsx";
-import oreo from "../assets/oreo1.jpg"
-import publi from "../assets/cafPast.jpg";
+
+import milanesas from "../assets/Pollo/milanesas.jpg"
+import hamburguesas from "../assets/Pollo/hamburguesas.jpg"
+import polloTrozado from "../assets/Pollo/polloTrozado.jpg"
+import arrollado from "../assets/Pollo/arrollados.jpg"
+import papas from "../assets/Pollo/papas.jpg"
+import merluza from "../assets/Pollo/merluza.webp"
+import nuggets from "../assets/Pollo/nuggets.jpg"
+
 import Spinner from "../assets/Spinner/Spinner.jsx";
 import Logo from "../assets/LogoCoqui.png"
 
-export const Cafeteria = (id) => {
+export const Polleria = (id) => {
   const mesa = id.match.url.slice(1, 3);
-  console.log(id.match.url.slice(1, 3), "buscando ideeee");
 
   let dispatch = useDispatch();
 
@@ -36,15 +42,12 @@ export const Cafeteria = (id) => {
   }, [dispatch]);
 
   const soloEsteComercio = allProduct.filter(
-    (e) => e.attributes.comercio.data.id === 3
+    (e) => e.attributes.comercio.data.id === 1
   );
 
   const CafeteriaProducts = soloEsteComercio?.filter(
     (e) => e.attributes?.categorias?.data.id === 1
     );
-
-  console.log(CafeteriaProducts
-  , " todos los productos de coqui cakes");
 
   const X1 = CafeteriaProducts?.filter(
     (e) => e.attributes?.sub_categoria?.data?.id === 1
@@ -56,22 +59,19 @@ export const Cafeteria = (id) => {
     (e) => e.attributes?.sub_categoria?.data?.id === 3
   );
   const X4 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 12
+    (e) => e.attributes?.sub_categoria?.data?.id === 4
   );
   const X5 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 13
+    (e) => e.attributes?.sub_categoria?.data?.id === 5
   );
   const X6 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 14
+    (e) => e.attributes?.sub_categoria?.data?.id === 6
   );
   const X7 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 15
+    (e) => e.attributes?.sub_categoria?.data?.id === 7
   );
-  // console.log(X3, " delicatesens");
-  console.log(
-    X7[0]?.attributes.sub_categoria.data.attributes.name,
-    "EN BUSCA DEL TITULO DE LA SUB CAT"
-  );
+
+
   return (
     <div className="containerL">
       <Nav id={mesa} />
@@ -80,7 +80,6 @@ export const Cafeteria = (id) => {
     product[0] ? (
       <a key={index} href={`#${product[0].attributes.sub_categoria.data.id}`} >
         {product[0]?.attributes.sub_categoria.data.attributes.name}
-        {console.log(product[0].attributes.sub_categoria.data.id, 'espero que apareza el numero de id')}
       </a>
     ) : null
   ))}
@@ -89,7 +88,7 @@ export const Cafeteria = (id) => {
         <div className="conteinerLB2 animate__animated  animate__zoomIn animate__faster">
           {X1[0] ? (
             <>
-              <img src={oreo} alt="promo" id="9"/>
+              <img src={milanesas} alt="promo" id={X1[0].attributes.sub_categoria.data.id}/>
               <Cards products={X1} />
             </>
           ) : null}
@@ -97,9 +96,9 @@ export const Cafeteria = (id) => {
           {X2[0] ? (
             <>
               <img
-                src="https://i.pinimg.com/originals/b5/57/59/b5575945f530d0f9b7d4ee4d470b63c6.jpg"
+                src={hamburguesas}
                 alt="promo"
-                id="10"
+                id={X2[0].attributes.sub_categoria.data.id}
               />
               <Cards products={X2} />
             </>
@@ -107,9 +106,9 @@ export const Cafeteria = (id) => {
           {X3 ? (
             <>
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4YRaEgOy_STk3Kykcd2wQl20kd_6rb0zsk2Qx64BceqS-CNK_8B0yBIJecBIFndtYcWY&usqp=CAU"
+                src={polloTrozado}
                 alt="promo"
-                id="11"
+                id={X3[0].attributes.sub_categoria.data.id}
               />
               <Cards products={X3} />
             </>
@@ -118,9 +117,9 @@ export const Cafeteria = (id) => {
             <>
               {" "}
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-TipnrNFLzeSVvyG2DcXvmn6PhuPB-jK4-g&usqp=CAU"
+                src={arrollado}
                 alt="promo"
-                id="12"
+                id={X4[0].attributes.sub_categoria.data.id}
               />
               <Cards products={X4} />
             </>
@@ -129,9 +128,9 @@ export const Cafeteria = (id) => {
           {X5[0] ? (
             <>
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-TipnrNFLzeSVvyG2DcXvmn6PhuPB-jK4-g&usqp=CAU"
+                src={papas}
                 alt="promo"
-                id="13"
+                id={X5[0].attributes.sub_categoria.data.id}
               />
               <Cards products={X5} />
             </>
@@ -141,9 +140,9 @@ export const Cafeteria = (id) => {
             <>
               {" "}
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-TipnrNFLzeSVvyG2DcXvmn6PhuPB-jK4-g&usqp=CAU"
+                src={merluza}
                 alt="promo"
-                id="14"
+                id={X6[0].attributes.sub_categoria.data.id}
               />
               <Cards products={X6} /> aaa
             </>
@@ -151,9 +150,9 @@ export const Cafeteria = (id) => {
           {X7[0] ? (
             <>
               <img
-                src="https://acdn.mitiendanube.com/stores/413/750/products/20200911_1414281-907801586675d4fd5c15998448698354-640-0.jpg"
+                src={nuggets}
                 alt="promo"
-                id="15"
+                id={X7[0].attributes.sub_categoria.data.id}
               />
               <Cards products={X7} />
             </>
