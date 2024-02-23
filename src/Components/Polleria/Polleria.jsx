@@ -88,7 +88,7 @@ export const Polleria = (id) => {
         <div className="conteinerLB2 animate__animated  animate__zoomIn animate__faster">
           {X1[0] ? (
             <>
-              <img src={milanesas} alt="promo" id={X1[0].attributes.sub_categoria.data.id}/>
+              <img src={milanesas} alt="promo" id={X1[0]?.attributes?.sub_categoria?.data?.id}/>
               <Cards products={X1} />
             </>
           ) : null}
@@ -98,7 +98,7 @@ export const Polleria = (id) => {
               <img
                 src={hamburguesas}
                 alt="promo"
-                id={X2[0].attributes.sub_categoria.data.id}
+                id={X2[0]?.attributes?.sub_categoria?.data?.id}
               />
               <Cards products={X2} />
             </>
@@ -108,7 +108,7 @@ export const Polleria = (id) => {
               <img
                 src={polloTrozado}
                 alt="promo"
-                id={X3[0].attributes.sub_categoria.data.id}
+                id={X3[0]?.attributes?.sub_categoria?.data?.id}
               />
               <Cards products={X3} />
             </>
@@ -119,7 +119,7 @@ export const Polleria = (id) => {
               <img
                 src={arrollado}
                 alt="promo"
-                id={X4[0].attributes.sub_categoria.data.id}
+                id={X4[0]?.attributes?.sub_categoria?.data?.id}
               />
               <Cards products={X4} />
             </>
@@ -130,7 +130,7 @@ export const Polleria = (id) => {
               <img
                 src={papas}
                 alt="promo"
-                id={X5[0].attributes.sub_categoria.data.id}
+                id={X5[0]?.attributes?.sub_categoria?.data?.id}
               />
               <Cards products={X5} />
             </>
@@ -142,7 +142,7 @@ export const Polleria = (id) => {
               <img
                 src={merluza}
                 alt="promo"
-                id={X6[0].attributes.sub_categoria.data.id}
+                id={X6[0]?.attributes?.sub_categoria?.data?.id}
               />
               <Cards products={X6} /> aaa
             </>
@@ -152,7 +152,7 @@ export const Polleria = (id) => {
               <img
                 src={nuggets}
                 alt="promo"
-                id={X7[0].attributes.sub_categoria.data.id}
+                id={X7[0]?.attributes?.sub_categoria?.data?.id}
               />
               <Cards products={X7} />
             </>

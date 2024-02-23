@@ -14,7 +14,7 @@ console.log(comercio[0]?.attributes.whatsapp
   return (
     <footer className="footy animate__animated  animate__zoomIn">
       <div className="linkss">
-        <a className="links" href={`http://wa.me/${comercio[0]?.attributes.whatsapp} `} Target="_blank">
+        <a className="links" href={`http://wa.me/${comercio[0]?.attributes?.whatsapp} `} Target="_blank">
           <svg
             className="linkC"
             width="46"
@@ -31,7 +31,7 @@ console.log(comercio[0]?.attributes.whatsapp
           </svg>
         </a>
 
-        <a className="links" href={comercio[0]?.attributes.instagram} Target="_blank">
+        <a className="links" href={comercio[0]?.attributes?.instagram} Target="_blank">
           <svg
             className="linkC"
             width="44"
