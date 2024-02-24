@@ -1,20 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CardsBag } from "./CardsBag/CardsB";
 import { Nav } from "../Nav/Nav";
 import "./myBag.css";
-import { asyncOrder } from "../redux/slice";
-import QRCode from "qrcode.react"
+import { asyncAllProducts, asyncCategorias, asyncComercio, asyncOrder } from "../redux/slice";
+import QRCode from "qrcode.react";
+import ModalConfirm from "../Modal/ModalConfirmacion/ModalConfirmar";
 
 export const Bag = (id) => {
-
-const toTop = ()=>{
-  window.scrollTo(0,0);
-}
- toTop();
-
   const dispatch = useDispatch();
-  console.log(id.match.params.id, "id tiene que ser solo numero sin barra");
+  const toTop = () => {
+    window.scrollTo(0, 0);
+  };
+  toTop();
+
+
+  useEffect(() => {
+    const fetchData = () => {
+      console.log("Effect is running");
+      dispatch(asyncComercio());
+      dispatch(asyncAllProducts());
+      dispatch(asyncCategorias());
+    };
+    
+    fetchData();
+    
+    const intervalId = setInterval(fetchData, 15 * 60 * 1000);
+    
+    return () => clearInterval(intervalId);
+  }, [dispatch]);
+
+
+
 
   let { favProd } = useSelector((state) => state.alldata);
 
@@ -48,6 +65,9 @@ const toTop = ()=>{
       payment: e.target.value,
     });
   };
+
+
+
   let result = favProd.filter((item, index) => {
     return favProd.indexOf(item) === index;
   });
@@ -57,14 +77,18 @@ const toTop = ()=>{
 
   return (
     <div className="backBag">
-      <Nav id={id.match.params.id}/>
+      <Nav id={id.match.params.id} />
       <div className="contBag animate__animated   animate__rollIn animate__faster">
-        <CardsBag products={result}/>
+        <CardsBag products={result} />
       </div>
-      <QRCode className="QrBag" value= {favProd.map(
-              (e) => e.name + "$" + e.price+"   "
-            )} size={200}/>
-             <div className="wsspTarj">
+      <div className="boxPedido">
+        <QRCode
+          className="QrBag"
+          value={favProd.map((e) => e.name + "$" + e.price + "   ")}
+          size={200}
+        />
+        <div className="boxPedido1"></div>
+        <div className="wsspTarj">
           <select
             className="selectP"
             onChange={metodoPago}
@@ -80,8 +104,8 @@ const toTop = ()=>{
           <a
             href={`http://wa.me/542915729501?text=Hola Franco Mensaje de mi pedido ➤ ${favProd.map(
               (e) => e.attributes.name + "$" + e.attributes.price + ", "
-            )} Total = $ ${total}, "${pago.payment}" , estamos en la mesa ${
-              id.match.params.id
+            )} Total = $ ${total}, "${pago?.payment}" , estamos en la mesa ${
+              id?.match?.params?.id
             }`}
             rel="noreferrer"
             target="_blank"
@@ -103,6 +127,8 @@ const toTop = ()=>{
             </button>
           </a>{" "}
         </div>
+          <ModalConfirm total={total} pago={pago.payment}/>
+      </div>
     </div>
   );
 };

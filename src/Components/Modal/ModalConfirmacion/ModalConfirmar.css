@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500&family=Montserrat&family=Mountains+of+Christmas&display=swap');
+
+.infoNavi{
+    display: flex;
+    background-color: white;
+    font-weight: 500;
+    border-bottom:whitesmoke 2px solid;
+    justify-content: center;
+}
+.btnMasInfo{
+    border: none;
+    border-radius: 50%;
+    box-shadow: 1px 2px 1px black
+}
+.textNavid{
+    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Mountains of Christmas', cursive;
+    font-size: 1rem;
+    color: black;
+    margin: auto;
+}
+.noBord{
+    border: none;
+    background-color: transparent;
+
+    border-radius: 50%;
+    padding: 0;
+ 
+}
+.noBord> svg{
+    fill: yellow;
+}
+
+.exit{
+    border-radius: 6px;
+    background-color: rgb(207, 52, 52);
+    color: white;
+    padding: 0rem .5rem 0rem .5rem ;
+    font-size: 1rem
+}

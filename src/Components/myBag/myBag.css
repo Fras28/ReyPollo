@@ -9,6 +9,17 @@
        flex-direction: column;
        justify-content: center;   
 }
+.boxPedido{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.boxPedido1{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .btnBack{
   outline: #c1373e double 1px;
   background-color: #295db1;
@@ -37,6 +48,10 @@
   height: 39px;
   outline: 1px rgb(90, 90, 90) solid;
 }
+.low{
+  background-color:#33a031c4 ;
+  margin-top: 0;
+}
 .warning{
   margin-bottom: -5px;
 }
@@ -56,6 +71,9 @@
   text-align: center;
   width: 129px;
 }
+.redX{border:solid 2px red;}
+
+
 .backBag{
   color: black;
   margin-left: 0;
