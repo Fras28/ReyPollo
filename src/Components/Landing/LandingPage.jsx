@@ -11,7 +11,7 @@ import Logo from "../assets/LogoCoqui.png"
 import { VerPedido } from "../BtnBag/BtnBag";
 import AlertDialogSlide from "../BtnNavidad/BtnNavidad";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncAllProducts } from "../redux/slice";
+import { asyncAllProducts, asyncCategorias, asyncComercio } from "../redux/slice";
 
 export default function LandingPage(url) {
   const dispatch = useDispatch();
@@ -19,7 +19,9 @@ export default function LandingPage(url) {
     // Función para realizar la acción deseada
     const fetchData = () => {
       console.log("Effect is running");
+      dispatch(asyncComercio());
       dispatch(asyncAllProducts());
+      dispatch(asyncCategorias());
     };
 
     // Ejecutar la función inmediatamente al montar el componente
@@ -36,7 +38,7 @@ export default function LandingPage(url) {
 
 
   return (
-    <div className="animate__animated  animate__zoomIn">
+    <div className=" animate__animated  animate__zoomIn">
       <div className="naviLanding titCasa ">
         <div className="logoL">
           <NavLink to={`/${id}`} >

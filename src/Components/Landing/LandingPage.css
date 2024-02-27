@@ -48,7 +48,6 @@
   min-height: 100px;
   font-size: 1.3rem;  
   margin-bottom: 16px;
-  background-image: url("../assets/bgNav.png");
 }
 .navi2{
   display: flex;
@@ -57,12 +56,9 @@
   justify-content: space-evenly;
   font-size: 1.3rem;
   font-family: 'Montserrat', sans-serif;
-  margin-bottom: 1rem;
   margin-top: 16px;
 }
-.navi2 >p{
- margin:0 1rem 0 1rem
-}
+
 
 
 .naviTit2{
