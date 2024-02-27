@@ -6,6 +6,7 @@ import "./LandingStart.css";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncAllProducts, asyncCategorias, asyncComercio } from "../redux/slice";
 import { ButtonEnter } from "./ButtonEnter/ButtonEnter";
+import CtaDNI from "../assets/BaneDNI.png"
 
 
 
@@ -52,10 +53,11 @@ export const Inicio = (url) => {
 
   return (
     <div className={`LandingBack ${animateOut ? "animate__animated animate__slideOutUp" : ""}`}>
-      <NavLink to={`${url.location.pathname}`}>
-        <div className="marcaLanging"></div>
-      </NavLink>
-      <div>
+<div className="landingStart">
+    <img src={CtaDNI} alt="" width="100%"/>
+
+
+      <div className="BottomLanding">
       <div>
         <AlertDialogSlide />
       </div>
@@ -63,6 +65,10 @@ export const Inicio = (url) => {
    <ButtonEnter titulo="Ver Catalogo"  />
       </div>
       </div>
+
+</div>
+
+   
     </div>
   );
 };
