@@ -28,7 +28,7 @@ export default function LandingPage(url) {
     return () => clearInterval(intervalId);
   }, [categorias]);
 
-  const categoriasConProductos = categorias.filter(categoria => categoria.attributes.articulos.data.length > 0);
+  const categoriasConProductos = categorias?.filter(categoria => categoria.attributes?.articulos?.data?.length > 0);
   const id = url.location.pathname.slice(1,3)
   return (
     <div className="animate__animated  animate__zoomIn">
