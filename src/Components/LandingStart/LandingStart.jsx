@@ -4,16 +4,18 @@ import { Link } from "react-router-dom";
 import AlertDialogSlide from "../BtnNavidad/BtnNavidad";
 import "./LandingStart.css";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncAllProducts, asyncCategorias, asyncComercio } from "../redux/slice";
+import {
+  asyncAllProducts,
+  asyncCategorias,
+  asyncComercio,
+} from "../redux/slice";
 import { ButtonEnter } from "./ButtonEnter/ButtonEnter";
-import CtaDNI from "../assets/BaneDNI.png"
-
-
+import CtaDNI from "../assets/BaneDNI.png";
 
 export const Inicio = (url) => {
   const dispatch = useDispatch();
   const [animateOut, setAnimateOut] = useState(false);
-  
+
   useEffect(() => {
     const fetchData = () => {
       console.log("Effect is running");
@@ -21,14 +23,13 @@ export const Inicio = (url) => {
       dispatch(asyncAllProducts());
       dispatch(asyncCategorias());
     };
-    
+
     fetchData();
-    
+
     const intervalId = setInterval(fetchData, 15 * 60 * 1000);
-    
+
     return () => clearInterval(intervalId);
   }, [dispatch]);
-
 
   const toTop = () => {
     window.scrollTo(0, 0);
@@ -52,23 +53,26 @@ export const Inicio = (url) => {
   }
 
   return (
-    <div className={`LandingBack ${animateOut ? "animate__animated animate__slideOutUp" : ""}`}>
-<div className="landingStart">
-    <img src={CtaDNI} alt="" width="100%"/>
+    <div
+      className={`LandingBack ${
+        animateOut ? "animate__animated animate__slideOutUp" : ""
+      }`}
+    >
+      <div className="landingStart">
+        <img src={CtaDNI} alt="" width="100%" />
 
-
-      <div className="BottomLanding">
-      <div>
-        <AlertDialogSlide />
+        <div className="BottomLanding">
+          <div>
+            <AlertDialogSlide />
+          </div>
+          <div className="btnEnter" onClick={handleButtonClick}>
+            <ButtonEnter titulo="Ver Catalogo" />
+          </div>
+  
+            <img src={CtaDNI} alt="" width="100%" />
+  
+        </div>
       </div>
-      <div className="btnEnter"   onClick={handleButtonClick}  >
-   <ButtonEnter titulo="Ver Catalogo"  />
-      </div>
-      </div>
-
-</div>
-
-   
     </div>
   );
 };
