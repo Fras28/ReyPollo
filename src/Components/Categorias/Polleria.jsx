@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Cards } from "../Cards/Cards.jsx";
-import "./Polleria.css";
+import "./Categorias.css";
 import { Nav } from "../Nav/Nav.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncAllProducts } from "../redux/slice.jsx";
@@ -15,7 +15,7 @@ import merluza from "../assets/Pollo/merluza.webp"
 import nuggets from "../assets/Pollo/nuggets.jpg"
 
 import Spinner from "../assets/Spinner/Spinner.jsx";
-import Logo from "../assets/LogoCoqui.png"
+import Logo from "../assets/Logo.png"
 
 export const Polleria = (id) => {
   const mesa = id.match.url.slice(1, 3);
@@ -39,7 +39,7 @@ export const Polleria = (id) => {
 
     // Limpiar el intervalo al desmontar el componente para evitar fugas de memoria
     return () => clearInterval(intervalId);
-  }, [dispatch]);
+  }, [allProduct]);
 
   const soloEsteComercio = allProduct.filter(
     (e) => e.attributes.comercio.data.id === 1

@@ -1,13 +1,13 @@
 .titleSection {
   font-size: 20px;
-  color: black;
+  color: white;
   font-family: "Montserrat", sans-serif;
-  text-align: left;
-  padding-left: 16px;
-  background-color: rgb(255, 255, 255);
-
+  gap: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  font-weight: 600;
+  align-items: center;
 }
-
 
 .cafeBg {
   border-radius: 20px;
@@ -33,11 +33,9 @@
   object-fit: cover;
   object-position: center;
   max-height: 250px;
-
 }
 .containerL {
   margin-top: 100px;
-
 }
 .sectioner {
   white-space: pre;
@@ -68,13 +66,12 @@
 
   padding: 12px 24px;
   background-color: gray;
-  margin-top: .3rem;
+  margin-top: 0.3rem;
 }
 .sectioner > a:active {
   background-color: #fcac009d;
   border-radius: orange;
 }
-
 
 /* display: flex;
 
@@ -86,10 +83,10 @@ border-radius: 24px; */
 
 /* justify-content: flex-start; */
 @media (max-width: 600px) {
-  .sectioner{
+  .sectioner {
     justify-content: flex-start;
   }
-  .leftInfo{
+  .leftInfo {
     padding-left: 0;
   }
 }
