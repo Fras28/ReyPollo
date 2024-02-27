@@ -9,6 +9,9 @@ import { Bag } from './Components/myBag/myBag.jsx';
 import { MyFoot } from './Components/myFoot/MyFooter.jsx';
 import { Inicio } from './Components/LandingStart/LandingStart.jsx';
 import LandingPage from './Components/Landing/LandingPage.jsx';
+import { Almacen } from './Components/Categorias/Almacen.jsx';
+import { Congelados } from './Components/Categorias/Congelados.jsx';
+import { Ofertas } from './Components/Categorias/Ofertas.jsx';
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
           <Route exact path="/:id?" component={Inicio}/>
           <Route exact path="/:id/Landing" component={LandingPage}/>
           <Route exact path="/:id/Landing/Polleria" component={Polleria}/>
+          <Route exact path="/:id/Landing/Almacen" component={Almacen}/>
+          <Route exact path="/:id/Landing/Congelados" component={Congelados}/>
+          <Route exact path="/:id/Landing/Ofertas" component={Ofertas}/>
           <Route exact path="/:id/bag" component={Bag}/>
 </Switch>
   <Foot/>

@@ -27,8 +27,9 @@ export default function LandingPage(url) {
     // Limpiar el intervalo al desmontar el componente para evitar fugas de memoria
     return () => clearInterval(intervalId);
   }, [categorias]);
-  const id = url.location.pathname.slice(1,3)
 
+  const categoriasConProductos = categorias.filter(categoria => categoria.attributes.articulos.data.length > 0);
+  const id = url.location.pathname.slice(1,3)
   return (
     <div className="animate__animated  animate__zoomIn">
       <div className="naviLanding titCasa ">
@@ -62,7 +63,7 @@ export default function LandingPage(url) {
 
       <div className="conteinerLB2  ">
         <div className="rowsCardL">
-          {categorias?.map(categoria =>  <NavLink
+          {categoriasConProductos?.map(categoria =>  <NavLink
             className="navLink"
             to={
               url.location.pathname === "/"

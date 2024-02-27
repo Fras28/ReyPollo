@@ -17,7 +17,7 @@ import nuggets from "../assets/Pollo/nuggets.jpg"
 import Spinner from "../assets/Spinner/Spinner.jsx";
 import Logo from "../assets/LogoCoqui.png"
 
-export const Cerdo = (id) => {
+export const Pescaderia = (id) => {
   const mesa = id.match.url.slice(1, 3);
 
   let dispatch = useDispatch();

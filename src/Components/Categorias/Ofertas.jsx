@@ -15,7 +15,7 @@ import merluza from "../assets/Pollo/merluza.webp"
 import nuggets from "../assets/Pollo/nuggets.jpg"
 
 import Spinner from "../assets/Spinner/Spinner.jsx";
-import Logo from "../assets/LogoCoqui.png"
+import Logo from "../assets/Logo.png"
 
 export const Ofertas = (id) => {
   const mesa = id.match.url.slice(1, 3);
@@ -39,7 +39,7 @@ export const Ofertas = (id) => {
 
     // Limpiar el intervalo al desmontar el componente para evitar fugas de memoria
     return () => clearInterval(intervalId);
-  }, [dispatch]);
+  }, [allProduct]);
 
   const soloEsteComercio = allProduct.filter(
     (e) => e.attributes.comercio.data.id === 1

@@ -39,7 +39,7 @@ export const Almacen = (id) => {
 
     // Limpiar el intervalo al desmontar el componente para evitar fugas de memoria
     return () => clearInterval(intervalId);
-  }, [dispatch]);
+  }, [allProduct]);
 
   const soloEsteComercio = allProduct.filter(
     (e) => e.attributes.comercio.data.id === 1
