@@ -7,14 +7,14 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import Logo from "../../assets/Logo.png";
-import "./ModalConfirmar.css";
+import "./ModalConfirmar.css"
 import { useSelector } from "react-redux";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ModalConfirm({total, pago }) {
+export default function ModalConfirm({total, pago, whatsappMessage }) {
   const [open, setOpen] = React.useState(false);
   const [telefono, setTelefono] = React.useState("");
   const [order, setOrder] = React.useState({
@@ -82,11 +82,7 @@ export default function ModalConfirm({total, pago }) {
               placeholder="Ingresar telefono"
             />
             <a
-              href={`http://wa.me/${
-                comercio[0]?.attributes?.whatsapp
-              }?text=Hola Rey Del Pollo ➤ ${favProd?.map(
-                (e) => e.attributes.name + "$" + e.attributes.price + ", "
-              )} Total = $ ${total}, "${pago}"`}
+              href={whatsappMessage}
               rel="noreferrer"
               target="_blank"
             >

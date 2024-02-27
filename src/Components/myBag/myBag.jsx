@@ -7,7 +7,7 @@ import { asyncAllProducts, asyncCategorias, asyncComercio, asyncOrder } from "..
 import QRCode from "qrcode.react";
 import ModalConfirm from "../Modal/ModalConfirmacion/ModalConfirmar";
 
-export const Bag = (id) => {
+export const BagXX = (id) => {
   const dispatch = useDispatch();
   const toTop = () => {
     window.scrollTo(0, 0);
@@ -66,7 +66,7 @@ export const Bag = (id) => {
     });
   };
 
-
+console.log(favProd, "fav product");
 
   let result = favProd.filter((item, index) => {
     return favProd.indexOf(item) === index;
@@ -75,6 +75,20 @@ export const Bag = (id) => {
   const valores = favProd.map((e) => parseInt(e.attributes.price, 10));
   let total = valores.reduce((a, b) => a + b, 0);
 
+
+  const groupedProducts = {};
+favProd.forEach((product) => {
+  const key = `${product.attributes.name} - ${product.attributes.price}`;
+  groupedProducts[key] = (groupedProducts[key] || 0) + 1;
+});
+
+const whatsappMessage = Object.entries(groupedProducts).map(([productInfo, count]) => {
+  const [name, price] = productInfo.split(' - ');
+  return `${name} ($${price}) x${count},`;
+}).join(', ');
+
+const whatsappLink = `http://wa.me/542915729501?text=Hola Franco Mensaje de mi pedido ➤ ${whatsappMessage} Total = $ ${total}, "${pago?.payment}"`;
+console.log(result, "que es esto ?");
   return (
     <div className="backBag">
       <Nav id={id.match.params.id} />
@@ -82,11 +96,7 @@ export const Bag = (id) => {
         <CardsBag products={result} />
       </div>
       <div className="boxPedido">
-        <QRCode
-          className="QrBag"
-          value={favProd.map((e) => e.name + "$" + e.price + "   ")}
-          size={200}
-        />
+  
         <div className="boxPedido1"></div>
         <div className="wsspTarj">
           <select
@@ -102,11 +112,7 @@ export const Bag = (id) => {
             <option>QR</option>
           </select>
           <a
-            href={`http://wa.me/542915729501?text=Hola Franco Mensaje de mi pedido ➤ ${favProd.map(
-              (e) => e.attributes.name + "$" + e.attributes.price + ", "
-            )} Total = $ ${total}, "${pago?.payment}" , estamos en la mesa ${
-              id?.match?.params?.id
-            }`}
+            href={whatsappLink}
             rel="noreferrer"
             target="_blank"
           >
@@ -127,7 +133,7 @@ export const Bag = (id) => {
             </button>
           </a>{" "}
         </div>
-          <ModalConfirm total={total} pago={pago.payment}/>
+          <ModalConfirm total={total} pago={pago.payment} whatsappMessage={whatsappLink}/>
       </div>
     </div>
   );

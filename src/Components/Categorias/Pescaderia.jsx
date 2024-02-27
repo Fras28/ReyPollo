@@ -27,7 +27,7 @@ export const Pescaderia = (id) => {
   useEffect(() => {
     // Función para realizar la acción deseada
     const fetchData = () => {
-      console.log("Effect is running");
+      console.log("Effect is running PESCADERIA");
       dispatch(asyncAllProducts());
     };
 

@@ -19,15 +19,13 @@ import Logo from "../assets/Logo.png"
 
 export const Polleria = (id) => {
   const mesa = id.match.url.slice(1, 3);
-
-  let dispatch = useDispatch();
-
-  let { allProduct } = useSelector((state) => state.alldata);
+  const dispatch = useDispatch();
+  const { allProduct } = useSelector((state) => state.alldata);
 
   useEffect(() => {
     // Función para realizar la acción deseada
     const fetchData = () => {
-      console.log("Effect is running");
+      console.log("Effect is running POLLERIA");
       dispatch(asyncAllProducts());
     };
 
@@ -35,11 +33,11 @@ export const Polleria = (id) => {
     fetchData();
 
     // Configurar la repetición cada 15 minutos
-    const intervalId = setInterval(fetchData, 15 * 60 * 1000); // 15 minutos en milisegundos
+    const intervalId = setInterval(fetchData, 15 * 60 * 1000);
 
     // Limpiar el intervalo al desmontar el componente para evitar fugas de memoria
     return () => clearInterval(intervalId);
-  }, [allProduct]);
+  }, [dispatch]);
 
   const soloEsteComercio = allProduct.filter(
     (e) => e.attributes.comercio.data.id === 1

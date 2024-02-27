@@ -3,11 +3,14 @@
 
 }
 .contBag{
-        margin: auto;
-        min-height: 60vh;
-       display: flex;
-       flex-direction: column;
-       justify-content: center;   
+  width: 100%;
+  margin-top: 5%;
+  display: flex;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5%;
+
 }
 .boxPedido{
   display: flex;
@@ -78,7 +81,6 @@
   color: black;
   margin-left: 0;
   margin-top: 10px;
-  background-color: rgb(255, 255, 255);
   padding: 0 4px 4px 0;
   border-radius: 0 24px 24px 0;
 
@@ -111,6 +113,8 @@
     margin-bottom: 1rem;
   }
   .contBag{
-   margin-top: 30%;
+    width: 100%;
+    margin: 0;
+    margin-top: 30%;
 }
 }

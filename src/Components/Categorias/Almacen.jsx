@@ -27,7 +27,7 @@ export const Almacen = (id) => {
   useEffect(() => {
     // Función para realizar la acción deseada
     const fetchData = () => {
-      console.log("Effect is running");
+      console.log("Effect is running ALMACEEN");
       dispatch(asyncAllProducts());
     };
 
@@ -39,7 +39,7 @@ export const Almacen = (id) => {
 
     // Limpiar el intervalo al desmontar el componente para evitar fugas de memoria
     return () => clearInterval(intervalId);
-  }, [allProduct]);
+  }, [dispatch]);
 
   const soloEsteComercio = allProduct.filter(
     (e) => e.attributes.comercio.data.id === 1

@@ -14,7 +14,7 @@ export default function LandingPage(url) {
   useEffect(() => {
 
     const fetchData = () => {
-      console.log("Effect is running");
+      console.log("Effect is running LandingPage");
       dispatch(asyncCategorias());
     };
 
@@ -26,7 +26,7 @@ export default function LandingPage(url) {
 
     // Limpiar el intervalo al desmontar el componente para evitar fugas de memoria
     return () => clearInterval(intervalId);
-  }, [categorias]);
+  }, [dispatch]);
 
   const categoriasConProductos = categorias?.filter(categoria => categoria.attributes?.articulos?.data?.length > 0);
   const id = url.location.pathname.slice(1,3)

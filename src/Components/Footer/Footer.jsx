@@ -7,10 +7,6 @@ export const Foot = () => {
  
   const { comercio } = useSelector((state) => state.alldata);
 
-console.log(comercio[0]?.attributes.whatsapp
-  , "info del comercio footer");
-
-
   return (
     <footer className="footy animate__animated  animate__zoomIn">
       <div className="linkss">
