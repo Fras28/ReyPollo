@@ -17,6 +17,9 @@ import nuggets from "../assets/Pollo/nuggets.jpg"
 import Spinner from "../assets/Spinner/Spinner.jsx";
 import Logo from "../assets/Logo.png"
 
+
+const API = process.env.REACT_APP_API_STRAPI;
+
 export const Congelados = (id) => {
   const mesa = id.match.url.slice(1, 3);
 
@@ -24,143 +27,71 @@ export const Congelados = (id) => {
 
   let { allProduct } = useSelector((state) => state.alldata);
 
-  useEffect(() => {
-    // Función para realizar la acción deseada
-    const fetchData = () => {
-      console.log("Effect is running CONGELADOS");
-      dispatch(asyncAllProducts());
-    };
-
-    // Ejecutar la función inmediatamente al montar el componente
-    fetchData();
-
-    // Configurar la repetición cada 15 minutos
-    const intervalId = setInterval(fetchData, 15 * 60 * 1000); // 15 minutos en milisegundos
-
-    // Limpiar el intervalo al desmontar el componente para evitar fugas de memoria
-    return () => clearInterval(intervalId);
-  }, [dispatch]);
 
   const soloEsteComercio = allProduct.filter(
     (e) => e.attributes.comercio.data.id === 1
   );
 
-  const CafeteriaProducts = soloEsteComercio?.filter(
-    (e) => e.attributes?.categorias?.data.id === 5
+  const Productos = soloEsteComercio?.filter(
+    (e) => e.attributes?.categorias?.data.id === 3
     );
 
-  const X1 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 10
-  );
-  const X2 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 11
-  );
-  const X3 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 12
-  );
-  const X4 = CafeteriaProducts?.filter(
-    (e) => e.attributes?.sub_categoria?.data?.id === 13
-  );
-  // const X5 = CafeteriaProducts?.filter(
-  //   (e) => e.attributes?.sub_categoria?.data?.id === 5
-  // );
-  // const X6 = CafeteriaProducts?.filter(
-  //   (e) => e.attributes?.sub_categoria?.data?.id === 6
-  // );
-  // const X7 = CafeteriaProducts?.filter(
-  //   (e) => e.attributes?.sub_categoria?.data?.id === 7
-  // );
-
-
-  return (
-    <div className="containerL">
-      <Nav id={mesa} />
-      <div className="sectioner">
-  {[ X4, X3, X2, X1].map((product, index) => (
-    product[0] ? (
-      <a key={index} href={`#${product[0].attributes.sub_categoria.data.id}`} >
-        {product[0]?.attributes.sub_categoria.data.attributes.name}
-      </a>
-    ) : null
+    const subCategoriaFilters = Productos?.reduce((acc, product) => {
+      const subCategoriaId = product.attributes?.sub_categoria?.data?.id;
+    
+      if (subCategoriaId) {
+        if (!acc[subCategoriaId]) {
+          acc[subCategoriaId] = [];
+        }
+        acc[subCategoriaId].push(product);
+      }
+    
+      return acc;
+    }, []);
+    
+    // Puedes acceder a cada Xn dinámicamente
+    const dynamicVariables = Object.keys(subCategoriaFilters).map((key) => {
+      return subCategoriaFilters[key];
+    });
+  
+    return (
+      <div className="containerL">
+        <Nav id={mesa} />
+        {subCategoriaFilters.length < 1?  <div className="sectioner">
+          {subCategoriaFilters.map((product, index) =>
+            product[0] ? (
+              <a
+                key={index}
+                href={`#${product[0].attributes.sub_categoria.data.id}`}
+              >
+                {product[0]?.attributes.sub_categoria.data.attributes.name}
+              </a>
+            ) : null
+          )}
+        </div>:null}
+       
+        <div className="conteinerLC ">
+          <div className="conteinerLB2 animate__animated  animate__zoomIn animate__faster">
+          {subCategoriaFilters?.map(product => (
+        product[0]?
+    <div key={product[0]?.attributes?.sub_categoria?.data?.id}>
+      <img
+        src={
+          `${API}${product[0]?.attributes?.sub_categoria?.data?.attributes?.picture?.data?.attributes?.url}` ||
+          Logo
+        }
+        alt={"img - "+product[0]?.attributes?.sub_categoria?.data?.attributes?.name}
+        id={product[0]?.attributes?.sub_categoria?.data?.id}
+        className="ImgSubCat"
+      />
+      <Cards products={product} />
+    </div> : null
   ))}
-</div>
-      <div className="conteinerLC ">
-        <div className="conteinerLB2 animate__animated  animate__zoomIn animate__faster">
-          {X1[0] ? (
-            <>
-              <img src={milanesas} alt="promo" id={X1[0]?.attributes?.sub_categoria?.data?.id}/>
-              <Cards products={X1} />
-            </>
-          ) : null}
-
-          {X2[0] ? (
-            <>
-              <img
-                src={hamburguesas}
-                alt="promo"
-                id={X2[0]?.attributes?.sub_categoria?.data?.id}
-              />
-              <Cards products={X2} />
-            </>
-          ) : null}
-          {X3 ? (
-            <>
-              <img
-                src={polloTrozado}
-                alt="promo"
-                id={X3[0]?.attributes?.sub_categoria?.data?.id}
-              />
-              <Cards products={X3} />
-            </>
-          ) : null}
-          {X4[0] ? (
-            <>
-              {" "}
-              <img
-                src={arrollado}
-                alt="promo"
-                id={X4[0]?.attributes?.sub_categoria?.data?.id}
-              />
-              <Cards products={X4} />
-            </>
-          ) : null}
-
-          {/* {X5[0] ? (
-            <>
-              <img
-                src={papas}
-                alt="promo"
-                id={X5[0]?.attributes?.sub_categoria?.data?.id}
-              />
-              <Cards products={X5} />
-            </>
-          ) : null}
-
-          {X6[0] ? (
-            <>
-              {" "}
-              <img
-                src={merluza}
-                alt="promo"
-                id={X6[0]?.attributes?.sub_categoria?.data?.id}
-              />
-              <Cards products={X6} /> aaa
-            </>
-          ) : null}
-          {X7[0] ? (
-            <>
-              <img
-                src={nuggets}
-                alt="promo"
-                id={X7[0]?.attributes?.sub_categoria?.data?.id}
-              />
-              <Cards products={X7} />
-            </>
-          ) : null} */}
+          </div>
+          {soloEsteComercio.length === 0 ? <Spinner imageUrl={Logo} /> : null}
         </div>
-       {soloEsteComercio.length === 0? <Spinner imageUrl={Logo}/>:null} 
+        <VerPedido id={mesa} />
       </div>
-      <VerPedido id={mesa} />
-    </div>
-  );
-};
+    );
+  };
+  

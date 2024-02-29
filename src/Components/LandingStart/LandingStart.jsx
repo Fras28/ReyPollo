@@ -15,7 +15,7 @@ import CtaDNI from "../assets/BaneDNI.png";
 export const Inicio = (url) => {
   const dispatch = useDispatch();
   const [animateOut, setAnimateOut] = useState(false);
-  let { categorias, allProduct, comercio } = useSelector((state) => state.alldata);
+
   useEffect(() => {
     const fetchData = () => {
       console.log("Effect is running Landing Start");

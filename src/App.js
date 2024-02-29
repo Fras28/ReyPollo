@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {  Route,Switch} from 'react-router-dom';
 import Landing from "./Components/Landing/LandingPage.jsx"
 import './App.css';
@@ -12,10 +12,31 @@ import { Almacen } from './Components/Categorias/Almacen.jsx';
 import { Congelados } from './Components/Categorias/Congelados.jsx';
 import { Ofertas } from './Components/Categorias/Ofertas.jsx';
 import { BagXX } from './Components/myBag/myBag.jsx';
+import { asyncAllProducts, asyncCategorias, asyncComercio } from './Components/redux/slice.jsx';
+import { useDispatch } from 'react-redux';
 // import { Bag } from './Components/Categorias/Bag.jsx';
 
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchData = () => {
+      console.log("Effect is running App");
+      dispatch(asyncComercio());
+      dispatch(asyncAllProducts());
+      dispatch(asyncCategorias());
+    };
+
+    fetchData();
+
+    const intervalId = setInterval(fetchData, 15 * 60 * 1000);
+
+    return () => clearInterval(intervalId);
+  }, [dispatch]);
+
+  const toTop = () => {
+    window.scrollTo(0, 0);
+  };
   return (
     <div className="App">
 <Switch>

@@ -53,17 +53,50 @@ const API_STRAPI_ARTICTULOS = process.env.REACT_APP_API_STRAPI_ARTICTULOS;
 const API_CATEGORIAS = process.env.REACT_APP_API_STRAPI_CATEGORIAS;
 const API_COMERCIO = process.env.REACT_APP_API_STRAPI_COMERCIOS
 
+// export const asyncAllProducts = () => {
+//   return async function (dispatch) {
+//     try {
+//       const response = await axios.get(API_STRAPI_ARTICTULOS);
+
+//       return dispatch(allProducts(response.data.data));
+//     } catch (error) {
+//       console.error("Error fetching data:", error);
+//     }
+//   };
+// };?pagination[page]=${currentPage}
 export const asyncAllProducts = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(API_STRAPI_ARTICTULOS);
-      console.log(response.data.data, "articulos pollo");
-      return dispatch(allProducts(response.data.data));
+      let allProductsData = [];
+      let currentPage = 1;
+
+      while (true) {
+        const response = await axios.get(`${API_STRAPI_ARTICTULOS}&pagination[page]=${currentPage}`);
+        
+        const responseData = response.data;
+
+        // Si no hay más datos en la página, sal del bucle
+        if (responseData.data.length === 0) {
+          break;
+        }
+
+        // Agregar datos de la página actual al array
+        allProductsData = [...allProductsData, ...responseData.data];
+
+        // Incrementar el número de página
+        currentPage++;
+      }
+
+      // Despachar la acción con la información combinada de todas las páginas
+      console.log(allProductsData, "all products slice");
+      return dispatch(allProducts(allProductsData));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 };
+
+
 export const asyncComercio = () => {
   return async function (dispatch) {
     try {

@@ -17,6 +17,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function ModalConfirm({total, pago, whatsappMessage }) {
   const [open, setOpen] = React.useState(false);
   const [telefono, setTelefono] = React.useState("");
+  const [payment, setPayment] = React.useState({
+    payment: "",
+  });
+
   const [order, setOrder] = React.useState({
     pedido: "",
     description: "",
@@ -34,13 +38,19 @@ export default function ModalConfirm({total, pago, whatsappMessage }) {
     });
   };
 
-  console.log(favProd, "favProd");
+
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const metodoPago = function handbleOnMethod(e) {
+    setPayment({
+      payment: e.target.value,
+    });
   };
 
   return (
@@ -71,6 +81,8 @@ export default function ModalConfirm({total, pago, whatsappMessage }) {
             <br />
             ayudanos a tener una mejor atencion y dejarias tu numero de telefono
             :
+            <form className="formPedido">
+
             <input
               className={`telefono-input selectP  ${order.telefono.length === 10 ? "" : "redX"}`}
               type="tel"
@@ -81,6 +93,18 @@ export default function ModalConfirm({total, pago, whatsappMessage }) {
               onChange={handleTelefonoChange}
               placeholder="Ingresar telefono"
             />
+             <select
+            className="selectP"
+            onChange={metodoPago}
+            value={pago.payment}
+          >
+            <option hidden disabled selected value={""}>
+              Como pagas?
+            </option>
+            <option>Efectivo</option>
+            <option>Tarjeta</option>
+            <option>QR</option>
+          </select>
             <a
               href={whatsappMessage}
               rel="noreferrer"
@@ -88,6 +112,7 @@ export default function ModalConfirm({total, pago, whatsappMessage }) {
             >
               <button className="btnWssp low">Enviar Pedido </button>
             </a>{" "}
+            </form>
           </DialogContentText>
           {order.telefono.length === 10 ? "" : <p style={{color:"red"}}>El numero de telefono debe contener 10 caracteres Ej: 2915838406...</p>}
         </DialogContent>

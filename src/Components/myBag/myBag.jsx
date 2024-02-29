@@ -41,10 +41,12 @@ export const BagXX = (id) => {
 
   const [order, setOrder] = useState({
     pedido: "",
-    description: "",
-    mesa: "",
-    price: "",
-    status: true,
+    detalle: "",
+    nombre: "",
+    telefono:"",
+    domicilio:"",
+    total_pedido: "",
+    metodo_de_pago:"",
   });
   console.log(order, "pedido post");
 
