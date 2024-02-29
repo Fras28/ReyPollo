@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {  Route,Switch} from 'react-router-dom';
 import Landing from "./Components/Landing/LandingPage.jsx"
 import './App.css';
@@ -13,26 +13,47 @@ import { Congelados } from './Components/Categorias/Congelados.jsx';
 import { Ofertas } from './Components/Categorias/Ofertas.jsx';
 import { BagXX } from './Components/myBag/myBag.jsx';
 import { asyncAllProducts, asyncCategorias, asyncComercio } from './Components/redux/slice.jsx';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import store, { saveStateToLocalStorage } from './Components/redux/store.jsx';
 // import { Bag } from './Components/Categorias/Bag.jsx';
 
 
 function App() {
   const dispatch = useDispatch();
+  const { allProduct, favProd, categorias, comercio } = useSelector((state) => state.alldata);
+
+  // useRef para mantener una referencia a los estados anteriores
+  const prevStatesRef = useRef({ allProduct: [], favProd: [], categorias: [], comercio: [] });
+
   useEffect(() => {
     const fetchData = () => {
       console.log("Effect is running App");
-      dispatch(asyncComercio());
-      dispatch(asyncAllProducts());
-      dispatch(asyncCategorias());
+
+      // Comparar estados actuales con estados anteriores
+      if (
+        allProduct !== prevStatesRef.current.allProduct ||
+        favProd !== prevStatesRef.current.favProd ||
+        categorias !== prevStatesRef.current.categorias ||
+        comercio !== prevStatesRef.current.comercio
+      ) {
+        // Solo si hay cambios, ejecuta las acciones
+        dispatch(asyncComercio());
+        dispatch(asyncAllProducts());
+        dispatch(asyncCategorias());
+      }
+
+      // Actualizar las referencias de los estados anteriores
+      prevStatesRef.current = { allProduct, favProd, categorias, comercio };
     };
 
     fetchData();
 
-    const intervalId = setInterval(fetchData, 15 * 60 * 1000);
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 15 * 60 * 1000);
 
     return () => clearInterval(intervalId);
-  }, [dispatch]);
+  }, [dispatch, allProduct, favProd, categorias, comercio]);
 
   const toTop = () => {
     window.scrollTo(0, 0);
