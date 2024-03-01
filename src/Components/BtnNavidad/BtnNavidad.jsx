@@ -63,7 +63,7 @@ export default function AlertDialogSlide() {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-          ¡Bienvenido a Coqui Cakes, donde cada torta es una obra maestra de sabor y cariño! En nuestro encantador catálogo, descubrirás las más deliciosas creaciones elaboradas con ingredientes de primera calidad y el toque mágico de amor que dedicamos a cada mezcla. ¡Esperamos que disfrutes de nuestras tortas tanto como nosotros disfrutamos preparándolas para ti! Elige la que más te guste y envíanos tu pedido. ¡Haz que cada ocasión sea aún más dulce con Coqui Cakes! 🍰💖
+          En el Rey del Pollo te brindaremos la mejor atencion y calidad de nuestros productos, te esperamos para conocernos y disfrutar de la mas rica elaboracion 😃
           </DialogContentText>
         </DialogContent>
         <DialogActions> </DialogActions>
