@@ -60,11 +60,14 @@ export const Ofertas = (id) => {
           {subCategoriaFilters.map((product, index) =>
             product[0] ? (
               <a
-                key={index}
-                href={`#${product[0].attributes.sub_categoria.data.id}`}
-              >
-                {product[0]?.attributes.sub_categoria.data.attributes.name}
-              </a>
+              key={index}
+              href={`#${product[0].attributes.sub_categoria.data.id}`}
+            >
+                   <svg width="10"   viewBox="0 0 407 357" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M237 357L407 178L237 0C210 0 184 0 157 1L317 178L157 356C184 357 210 356 237 357Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M81 357L251 178L81 0C54 0 28 0 0 1L161 178L0 356C28 357 54 356 81 357Z" fill="white"/>
+</svg> {product[0]?.attributes.sub_categoria.data.attributes.name}
+            </a>
             ) : null
           )}
         </div>
