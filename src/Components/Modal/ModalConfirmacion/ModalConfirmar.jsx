@@ -163,7 +163,7 @@ export default function ModalConfirm({total }) {
                   Por favor, ingrese un número de teléfono válido.
                 </p>
               )}
-          <label htmlFor="name">name :</label>
+          <label htmlFor="name">Nombre Completo:</label>
           <input
             className={`telefono-input selectP ${
               order.name.length > 3 ? "" : "redX"
@@ -280,13 +280,13 @@ export default function ModalConfirm({total }) {
   ) && (
     <ul style={{ color: "red", marginTop: "10px" }}>
       {!(order.name.length > 3) && (
-        <li>Ingrese un name válido (más de 3 caracteres).</li>
+        <li className="liError">Ingrese un name válido (más de 3 caracteres).</li>
       )}
       {!(order.tipo_orden === "Take Away" || (order.tipo_orden === "Delivery" && order.domicilio.length > 7)) && (
-        <li>Seleccione una opción válida para el tipo de pedido y, si es Delivery, ingrese una dirección válida.</li>
+        <li className="liError">Seleccione una opción válida para el tipo de pedido y, si es Delivery, ingrese una dirección válida.</li>
       )}
-      {!order.metodo_de_pago && <li>Seleccione una forma de pago.</li>}
-      {!order.total_pedido && <li>El total del pedido no puede estar vacío.</li>}
+      {!order.metodo_de_pago && <li className="liError">Seleccione una forma de pago.</li>}
+      {!order.total_pedido && <li className="liError">El total del pedido no puede estar vacío.</li>}
     </ul>
   )
 }
@@ -297,7 +297,6 @@ export default function ModalConfirm({total }) {
       </div>
             </form>
           </DialogContentText>
-          {order?.telefono?.length === 10 ? "" : <p style={{ color: "red" }}>El número de teléfono debe contener 10 caracteres. Ejemplo: 2915838406...</p>}
         </DialogContent>
         <DialogActions> </DialogActions>
       </Dialog>
