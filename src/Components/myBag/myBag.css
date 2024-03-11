@@ -3,7 +3,7 @@
 
 }
 .contBag{
-width: 100%;
+
 margin-top: 10%;
 padding-top: 5%;
 display: flex;
@@ -11,7 +11,6 @@ border-radius: 20px;
 align-items: center;
 justify-content: center;
 border-radius: 5%;
-
 }
 .boxPedido{
 display: flex;
@@ -119,7 +118,7 @@ margin-top: 2rem;
 }
 .contBag{
   width: 100%;
-  margin: 0;
+
   margin-top: 30%;
 }
 .wsspTarj{

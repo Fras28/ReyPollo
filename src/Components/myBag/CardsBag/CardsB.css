@@ -2,6 +2,7 @@
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  width: 100%;
 }
 .granoCafe {
   margin-top: 1.5rem;
@@ -12,15 +13,23 @@
 }
 .aPagar {
   padding: 0.3rem;
-
   color: white;
   font-size: 1rem;
   font-weight: 600;
   background: #E88A23;
-  box-shadow: 0px 0px 8px #E88A23;
+  /* box-shadow: 0px 0px 8px #E88A23; */
   margin-left: 1rem;
   margin-right: 1rem;
   border-radius: 24px;
+  box-shadow: rgba(232, 138, 35, 0.17) 0px -23px 25px 0px inset, 
+  rgba(232, 138, 35, 0.15) 0px -36px 30px 0px inset, 
+  rgba(232, 138, 35, 0.1) 0px -79px 40px 0px inset, 
+  rgba(232, 138, 35, 0.06) 0px 2px 1px, 
+  rgba(232, 138, 35, 0.09) 0px 4px 2px, 
+  rgba(232, 138, 35, 0.09) 0px 8px 4px, 
+  rgba(232, 138, 35, 0.09) 0px 16px 8px, 
+  rgba(232, 138, 35, 0.09) 0px 32px 16px;
+
 }
 
 .rowsCardBag {
