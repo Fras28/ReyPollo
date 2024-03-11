@@ -1,64 +1,72 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CardsBag } from "./CardsBag/CardsB";
-import { Nav } from "../Nav/Nav";
+import  Nav  from "../Nav/Nav";
 import "./myBag.css";
-import { asyncAllProducts, asyncCategorias, asyncComercio, asyncOrder } from "../redux/slice";
+import {
+  asyncAllProducts,
+  asyncCategorias,
+  asyncComercio,
+  asyncOrder,
+} from "../redux/slice";
 import QRCode from "qrcode.react";
 import ModalConfirm from "../Modal/ModalConfirmacion/ModalConfirmar";
 
 export const BagXX = (id) => {
   const dispatch = useDispatch();
-  const toTop = () => {
-    window.scrollTo(0, 0);
-  };
-  toTop();
 
+  const [hasScrolledToTop, setHasScrolledToTop] = useState(false);
 
   useEffect(() => {
-    const fetchData = () => {
-      console.log("Effect is running");
-      dispatch(asyncComercio());
-      dispatch(asyncAllProducts());
-      dispatch(asyncCategorias());
-    };
-    
-    fetchData();
-    
-    const intervalId = setInterval(fetchData, 15 * 60 * 1000);
-    
-    return () => clearInterval(intervalId);
-  }, [dispatch]);
+    if (!hasScrolledToTop) {
+      window.scrollTo(0, 0);
+      setHasScrolledToTop(true);
+    }
+  }, [hasScrolledToTop]);
 
-
-
-
-  let { favProd } = useSelector((state) => state.alldata);
-
+  let { favProd, comercio } = useSelector((state) => state.alldata);
+  const [telefono, setTelefono] = useState("");
   const [pago, setPago] = useState({
     payment: "",
   });
+  const pedidox = favProd.map((x) => x.attributes.name);
 
-  const [order, setOrder] = useState({
-    pedido: "",
-    detalle: "",
-    nombre: "",
-    telefono:"",
-    domicilio:"",
-    total_pedido: "",
-    metodo_de_pago:"",
+  let result = favProd.filter((item, index) => {
+    return favProd.indexOf(item) === index;
   });
-  console.log(order, "pedido post");
+
+  const valores = favProd.map((e) => parseInt(e.attributes.price, 10));
+  let total = valores.reduce((a, b) => a + b, 0);
+
+  const groupedProducts = {};
+  favProd.forEach((product) => {
+    const key = `${product.attributes.name} - ${product.attributes.price}`;
+    groupedProducts[key] = (groupedProducts[key] || 0) + 1;
+  });
+
+  const orderString = Object.entries(groupedProducts)
+    .map(([productInfo, count]) => {
+      const [name, price] = productInfo.split(" - ");
+      return `${name} ($${price}) x${count}`;
+    })
+    .join(", ");
+
+  // console.log(groupedProducts, "vamos a filtrar para q sea solo el pedido");
+  const [order, setOrder] = useState({
+    Order_total: total,
+    Payment_type: "",
+    Order: orderString,
+    Name: "",
+    Detail: "",
+    Type_order: "",
+    telefono: "291",
+    Adress: "",
+  });
+
+
 
   const sendComanda = () => {
-    setOrder({
-      pedido: favProd.map((x) => x.name).join(),
-      description: "aprovado",
-      mesa: id.match.params.id,
-      price: total,
-      status: true,
-    });
-    console.log(order, "esto es la info del post");
+    console.log("Comanda saliendo del componente");
     dispatch(asyncOrder(order));
   };
 
@@ -68,29 +76,27 @@ export const BagXX = (id) => {
     });
   };
 
-console.log(favProd, "fav product");
+  const handleOrder = (e) => {
+    setOrder({
+      ...order,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  let result = favProd.filter((item, index) => {
-    return favProd.indexOf(item) === index;
-  });
+  const whatsappMessage = Object.entries(groupedProducts)
+    .map(([productInfo, count]) => {
+      const [name, price] = productInfo.split(" - ");
+      return `${name} ($${price}) x${count},`;
+    })
+    .join(", ");
 
-  const valores = favProd.map((e) => parseInt(e.attributes.price, 10));
-  let total = valores.reduce((a, b) => a + b, 0);
+  const whatsappLink = `http://wa.me/${comercio[0]?.attributes.whatsapp}?text=Hola ${comercio[0]?.attributes.name} Mensaje de mi pedido ➤ ${whatsappMessage} Total = $ ${total}, "${pago?.payment}"`;
 
+  const [showModal, setShowModal] = useState(false);
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
 
-  const groupedProducts = {};
-favProd.forEach((product) => {
-  const key = `${product.attributes.name} - ${product.attributes.price}`;
-  groupedProducts[key] = (groupedProducts[key] || 0) + 1;
-});
-
-const whatsappMessage = Object.entries(groupedProducts).map(([productInfo, count]) => {
-  const [name, price] = productInfo.split(' - ');
-  return `${name} ($${price}) x${count},`;
-}).join(', ');
-
-const whatsappLink = `http://wa.me/542915729501?text=Hola Franco Mensaje de mi pedido ➤ ${whatsappMessage} Total = $ ${total}, "${pago?.payment}"`;
-console.log(result, "que es esto ?");
   return (
     <div className="backBag">
       <Nav id={id.match.params.id} />
@@ -98,13 +104,51 @@ console.log(result, "que es esto ?");
         <CardsBag products={result} />
       </div>
       <div className="boxPedido">
-  
         <div className="boxPedido1"></div>
-        <div className="wsspTarj">
+        {/* <div className="wsspTarj">
+          <label htmlFor="telefono">Teléfono:</label>
+          <input
+            className={`telefono-input selectP ${
+              /^\d{10}$/.test(order.Phone) ? "" : "redX"
+            }`}
+            type="tel"
+            id="telefono"
+            name="Phone"
+            maxLength="10"
+            pattern="[0-9]{10}"
+            value={order.Phone}
+            onChange={handleOrder}
+            placeholder="Ingresar telefono"
+          />
+          {order.Phone && /^\d{10}$/.test(order.Phone) ? (
+            <p className="valid-message">✔️</p>
+          ) : null}
+          {order.Phone && /^\d{10}$/.test(order.Phone)
+            ? null
+            : order.Phone &&
+              order.Phone !== "291" && (
+                <p className="error-message">
+                  Por favor, ingrese un número de teléfono válido.
+                </p>
+              )}
+          <label htmlFor="nombre">Nombre :</label>
+          <input
+            className={`telefono-input selectP ${
+              order.Name.length > 3 ? "" : "redX"
+            }`}
+            type="text"
+            id="nombre"
+            name="Name"
+            max="10"
+            value={order.Name}
+            onChange={handleOrder}
+            placeholder="Nombre de quien retira"
+          />
           <select
             className="selectP"
-            onChange={metodoPago}
-            value={pago.payment}
+            name="Payment_type"
+            onChange={handleOrder}
+            value={order.Payment_type}
           >
             <option hidden disabled selected value={""}>
               Como pagas?
@@ -113,12 +157,71 @@ console.log(result, "que es esto ?");
             <option>Tarjeta</option>
             <option>QR</option>
           </select>
+          <select
+            className="selectP"
+            name="Type_order"
+            onChange={handleOrder}
+            value={order.Type_order}
+          >
+            <option hidden disabled selected value={""}>
+              Delivery o Take Away?
+            </option>
+            <option>Delivery</option>
+            <option>Take Away</option>
+          </select>
+          <div
+            style={{
+              display: order.Type_order === "Delivery" ? "flex" : "none",
+              flexDirection:"column"
+            }}
+          >
+            <label htmlFor="domicilio" >Domicilio:</label>
+            <input
+              className={`telefono-input selectP ${
+                order.Type_order === "Delivery" && order.Adress.length > 7
+                  ? ""
+                  : "redX"
+              }`}
+              type="text"
+              id="domicilio"
+              name="Adress"
+              max="20"
+              value={order.Adress}
+              onChange={handleOrder}
+              placeholder="Domicilio para la entrega"
+            />
+          </div>
           <a
             href={whatsappLink}
+            onClick={(e) => sendComanda(e)}
             rel="noreferrer"
             target="_blank"
+            disabled={
+              !(
+                /^\d{10}$/.test(order.Phone) &&
+                order.Name.length > 3 &&
+                (order.Type_order === "Take Away" ||
+                  (order.Type_order === "Delivery" &&
+                    order.Adress.length > 7)) &&
+                order.Payment_type &&
+                order.Order_total
+              )
+            }
           >
-            <button className="btnWssp">
+            <button
+              className="btnWssp"
+              disabled={
+                !(
+                  /^\d{10}$/.test(order.Phone) &&
+                  order.Name.length > 3 &&
+                  (order.Type_order === "Take Away" ||
+                    (order.Type_order === "Delivery" &&
+                      order.Adress.length > 7)) &&
+                  order.Payment_type &&
+                  order.Order_total
+                )
+              }
+            >
               Enviar Pedido{" "}
               <svg
                 width="16"
@@ -134,9 +237,23 @@ console.log(result, "que es esto ?");
               </svg>
             </button>
           </a>{" "}
-        </div>
-          <ModalConfirm total={total} pago={pago.payment} whatsappMessage={whatsappLink}/>
+          {!(
+            /^\d{10}$/.test(order.Phone) &&
+            order.Name.length > 3 &&
+            (order.Type_order === "Take Away" ||
+              (order.Type_order === "Delivery" && order.Adress.length > 7)) &&
+            order.Payment_type &&
+            order.Order_total
+          ) && (
+            <p style={{ color: "red", marginTop: "10px" }}>
+              Por favor, complete todos los campos obligatorios.
+            </p>
+          )}
+        </div> */}
+        {/* <ModalConfirm /> */}
       </div>
+    
+      <ModalConfirm total={total} sendComanda={sendComanda} />
     </div>
   );
 };

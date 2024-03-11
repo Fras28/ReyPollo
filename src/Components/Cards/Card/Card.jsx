@@ -23,6 +23,7 @@ export const Card = ({ producto }) => {
       price: [product.price],
     });
     dispatch(asyncfavProducts(producto));
+    
     setArticles({
       ...articles,
       name: [],

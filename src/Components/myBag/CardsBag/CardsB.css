@@ -1,8 +1,7 @@
 .cartaB {
   padding-bottom: 0.5rem;
-  width: 80vh;
+  padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  margin-top: 5%;
 }
 .granoCafe {
   margin-top: 1.5rem;
@@ -29,10 +28,4 @@
   width: 100%;
   margin: auto;
   flex-direction: column;
-}
-@media (max-width: 600px) {
-.cartaB {
-  padding-bottom: 0.5rem;
-  width: 100%;
-  padding-top: 5%;}
 }

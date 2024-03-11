@@ -12,9 +12,10 @@ import { Almacen } from './Components/Categorias/Almacen.jsx';
 import { Congelados } from './Components/Categorias/Congelados.jsx';
 import { Ofertas } from './Components/Categorias/Ofertas.jsx';
 import { BagXX } from './Components/myBag/myBag.jsx';
-import { asyncAllProducts, asyncCategorias, asyncComercio } from './Components/redux/slice.jsx';
+import { asyncAllProducts, asyncCategorias, asyncComercio, asyncUser } from './Components/redux/slice.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import store, { saveStateToLocalStorage } from './Components/redux/store.jsx';
+import { ToastContainer } from 'react-toastify';
 // import { Bag } from './Components/Categorias/Bag.jsx';
 
 
@@ -24,36 +25,22 @@ function App() {
 
   // useRef para mantener una referencia a los estados anteriores
   const prevStatesRef = useRef({ allProduct: [], favProd: [], categorias: [], comercio: [] });
-
   useEffect(() => {
     const fetchData = () => {
-      console.log("Effect is running App");
-
-      // Comparar estados actuales con estados anteriores
-      if (
-        allProduct !== prevStatesRef.current.allProduct ||
-        favProd !== prevStatesRef.current.favProd ||
-        categorias !== prevStatesRef.current.categorias ||
-        comercio !== prevStatesRef.current.comercio
-      ) {
-        // Solo si hay cambios, ejecuta las acciones
-        dispatch(asyncComercio());
-        dispatch(asyncAllProducts());
-        dispatch(asyncCategorias());
-      }
-
-      // Actualizar las referencias de los estados anteriores
-      prevStatesRef.current = { allProduct, favProd, categorias, comercio };
+      console.log("Effect is running");
+      dispatch(asyncComercio());
+      dispatch(asyncAllProducts());
+      dispatch(asyncCategorias());
+      dispatch(asyncUser());
     };
-
+    
     fetchData();
-
-    const intervalId = setInterval(() => {
-      fetchData();
-    }, 15 * 60 * 1000);
-
+    
+    const intervalId = setInterval(fetchData, 15 * 60 * 1000);
+    
     return () => clearInterval(intervalId);
-  }, [dispatch, allProduct, favProd, categorias, comercio]);
+  }, [dispatch]);
+  
 
   const toTop = () => {
     window.scrollTo(0, 0);
@@ -61,6 +48,7 @@ function App() {
   return (
     <div className="App">
 <Switch>
+      
           <Route exact path="/:id?" component={Inicio}/>
           <Route exact path="/:id/Landing" component={LandingPage}/>
           <Route exact path="/:id/Landing/Polleria" component={Polleria}/>

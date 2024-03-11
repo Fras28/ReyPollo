@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Cards } from "../Cards/Cards.jsx";
 import "./Categorias.css";
-import { Nav } from "../Nav/Nav.jsx";
+import  Nav  from "../Nav/Nav.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncAllProducts } from "../redux/slice.jsx";
 import { VerPedido } from "../BtnBag/BtnBag.jsx";
@@ -16,6 +16,7 @@ import nuggets from "../assets/Pollo/nuggets.jpg"
 
 import Spinner from "../assets/Spinner/Spinner.jsx";
 import Logo from "../assets/Logo.png"
+import { ToastContainer } from "react-toastify";
 
 
 const API = process.env.REACT_APP_API_STRAPI;
@@ -55,6 +56,7 @@ export const Polleria = (id) => {
   
     return (
       <div className="containerL">
+    
         <Nav id={mesa} />
         <div className="sectioner">
           {subCategoriaFilters.map((product, index) =>
