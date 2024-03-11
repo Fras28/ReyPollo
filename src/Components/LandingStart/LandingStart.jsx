@@ -16,20 +16,20 @@ export const Inicio = (url) => {
   const dispatch = useDispatch();
   const [animateOut, setAnimateOut] = useState(false);
 
-  useEffect(() => {
-    const fetchData = () => {
-      console.log("Effect is running Landing Start");
-      dispatch(asyncComercio());
-      dispatch(asyncAllProducts());
-      dispatch(asyncCategorias());
-    };
+  // useEffect(() => {
+  //   const fetchData = () => {
+  //     console.log("Effect is running Landing Start");
+  //     dispatch(asyncComercio());
+  //     dispatch(asyncAllProducts());
+  //     dispatch(asyncCategorias());
+  //   };
 
-    fetchData();
+  //   fetchData();
 
-    const intervalId = setInterval(fetchData, 15 * 60 * 1000);
+  //   const intervalId = setInterval(fetchData, 15 * 60 * 1000);
 
-    return () => clearInterval(intervalId);
-  }, [dispatch]);
+  //   return () => clearInterval(intervalId);
+  // }, [dispatch]);
 
   const toTop = () => {
     window.scrollTo(0, 0);

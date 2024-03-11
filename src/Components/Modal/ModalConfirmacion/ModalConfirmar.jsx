@@ -133,8 +133,7 @@ export default function ModalConfirm({total }) {
           <DialogContentText id="alert-dialog-slide-description">
             Genial, estas a un paso de finalizar tu pedido.
             <br />
-            ayudanos a tener una mejor atencion y dejarias tu numero de telefono
-            :
+            ayudanos a tener una mejor atencion :
             <form className="formPedido">
 
             <div className="boxPedido">
