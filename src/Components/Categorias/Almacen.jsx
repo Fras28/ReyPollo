@@ -68,15 +68,15 @@ export const Almacen = (id) => {
           {subCategoriaFilters?.map(product => (
         product[0]?
     <div key={product[0]?.attributes?.sub_categoria?.data?.id}>
-      <img
-        src={
-          `${API}${product[0]?.attributes?.sub_categoria?.data?.attributes?.picture?.data?.attributes?.url}` ||
-          Logo
-        }
-        alt={"img - "+product[0]?.attributes?.sub_categoria?.data?.attributes?.name}
-        id={product[0]?.attributes?.sub_categoria?.data?.id}
-        className="ImgSubCat"
-      />
+     {product[0]?.attributes?.sub_categoria?.data?.attributes?.picture?.data?.attributes?.url?   <img
+      src={
+        `${API}${product[0]?.attributes?.sub_categoria?.data?.attributes?.picture?.data?.attributes?.url}` ||
+        Logo
+      }
+      alt={"img - "+product[0]?.attributes?.sub_categoria?.data?.attributes?.name}
+      id={product[0]?.attributes?.sub_categoria?.data?.id}
+      className="ImgSubCat"
+    /> :null}
       <Cards products={product} />
     </div> : null
   ))}
