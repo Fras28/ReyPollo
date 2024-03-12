@@ -12,6 +12,7 @@ import {
   asyncComercio,
 } from "../redux/slice";
 import Spinner from "../assets/Spinner/Spinner";
+import Horarios from "../BtnNavidad/Horarios";
 
 export default function LandingPage(url) {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ export default function LandingPage(url) {
           >
             <path d="M59 0.999995L0 1" stroke="#E88A23" />
           </svg>
-          <p className="naviTit2"> Nuesto Catalogo </p>
+          <Horarios />
           <svg
             width="59"
             height="2"
