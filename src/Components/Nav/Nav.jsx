@@ -43,7 +43,7 @@ const Nav = () => {
 
         <div className="morton foolishIn">
           <NavLink to={`/${match?.params.id}/Landing`}>
-            <img src={Logo} alt="logoCakes" width="100px" />
+            <img src={Logo} alt="logoCakes" width="200px" />
           </NavLink>
         </div>
       </div>

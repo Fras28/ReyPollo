@@ -43,7 +43,7 @@ export default function LandingPage(url) {
       <div className="naviLanding titCasa ">
         <div className="logoL">
           <NavLink to={`/${id}`}>
-            <img src={Logo} alt="" width="120px" />
+            <img src={Logo} alt="" width="250px" />
           </NavLink>
         </div>
         <div className="navi2">

@@ -20,6 +20,7 @@ h1{
   padding-bottom: 2%;
   border-bottom:  1px solid orange;
   background-image: url("../assets/bgNav.png");
+  min-height: 80px;
 }
   /*============= Search bar ==========*/
 .back{

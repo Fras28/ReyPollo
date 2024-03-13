@@ -40,7 +40,7 @@ export default function Horarios() {
   return (
     <div className="btnNav2">
       <div>
-        <button onClick={handleClickOpen} className="noBord" style={{fontSize:"1rem"}}>
+        <button onClick={handleClickOpen} className="BtnHoras" >
       Nuestros Horarios
         </button>
       </div>
