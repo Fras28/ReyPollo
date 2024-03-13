@@ -6,12 +6,13 @@ import './LoginComponent.css'; // Importa tu archivo de estilos CSS
 
 const LoginComponent = ({ onLoginSuccess }) => {
   const dispatch = useDispatch();
-  const { comandas } = useSelector((state) => state.alldata);
+  const { comandas, usuarioComander } = useSelector((state) => state.alldata);
   const [modalIsOpen, setModalIsOpen] = useState(true);
   const [credentials, setCredentials] = useState({
     email: '',
     password: '',
   });
+  const [isLoading, setIsLoading] = useState(false); // Estado para manejar la carga
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -27,10 +28,26 @@ const LoginComponent = ({ onLoginSuccess }) => {
     }
   };
 
-  const handleLogin = () => {
-    dispatch(asyncLogIn(credentials));
-    setModalIsOpen(false);
-    onLoginSuccess();
+  const handleLogin = async () => {
+    try {
+      // Activar el estado de carga
+      setIsLoading(true);
+
+      // Realizar el inicio de sesión
+      await dispatch(asyncLogIn(credentials));
+
+      // Si la acción asyncLogIn se resuelve correctamente, cerrar la modal
+      setModalIsOpen(false);
+
+      // Ejecutar la función onLoginSuccess si es necesario
+      onLoginSuccess();
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+      // Puedes manejar el error si es necesario
+    } finally {
+      // Desactivar el estado de carga independientemente de si la petición se realizó con éxito o no
+      setIsLoading(false);
+    }
   };
 
   return (

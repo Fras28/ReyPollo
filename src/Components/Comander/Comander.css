@@ -1,7 +1,7 @@
 /* Comander.css */
 
 .comandas-container {
-  max-width: 600px;
+  /* max-width: 600px; */
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -16,9 +16,11 @@
   margin-bottom: 20px;
 }
 
-.comandas-list {
+.comanda-item {
   list-style-type: none;
   padding: 0;
+  min-width: 300px;
+ 
 }
 
 .comanda-item {
@@ -76,6 +78,15 @@
 
   background-color:rgb(174, 174, 0) ;
 }
+
+.contComandas{
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+
+}
+
 /* Add additional styling as needed */
 
   /* Estilos para el formulario de inicio de sesión */
@@ -109,4 +120,11 @@
   
   .login-form button:hover {
     background-color: #45a049;
+  }
+
+  @media (max-width: 768px) {
+    .contComandas {
+      flex-direction: column; /* Distribuir en una sola columna */
+      align-items: center; /* Centrar los elementos en la columna */
+    }
   }
