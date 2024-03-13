@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -9,7 +8,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncOrder } from "../../redux/slice";
-import Logo from "../../assets/Logo.png"
+import Logo from "../../assets/Logo.png";
+import "./ModalConfirmar.css";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -19,6 +19,8 @@ export default function ModalConfirm({ total }) {
   const dispatch = useDispatch();
   const { comercio, favProd } = useSelector((state) => state.alldata);
   const [open, setOpen] = React.useState(false);
+
+  const [statusOrder, setStatusOrder] = React.useState(1);
 
   const groupedProducts = {};
   favProd.forEach((product) => {
@@ -39,7 +41,7 @@ export default function ModalConfirm({ total }) {
     pedido: orderString,
     name: "",
     Detail: "",
-    tipo_orden: "",
+    tipo_pedido: "",
     telefono: "291",
     domicilio: "",
   });
@@ -66,11 +68,6 @@ export default function ModalConfirm({ total }) {
     });
   };
 
-  const sendComanda = (e) => {
-    console.log("Comanda saliendo del componente");
-    dispatch(asyncOrder(order));
-  };
-
   const whatsappMessage = Object.entries(groupedProducts)
     .map(([productInfo, count]) => {
       const [name, price] = productInfo.split(" - ");
@@ -80,6 +77,28 @@ export default function ModalConfirm({ total }) {
 
   const whatsappLink = `http://wa.me/${comercio[0]?.attributes?.whatsapp}?text=Hola ${comercio[0]?.attributes?.name} Mensaje de mi pedido ➤ ${whatsappMessage} Total = $ ${total}, ${order?.metodo_de_pago}`;
 
+  const sendComanda = async (e) => {
+    e.preventDefault(); // Prevenir la acción por defecto del enlace
+
+    try {
+      // Aquí colocas la lógica para enviar la comanda
+      const response = await dispatch(asyncOrder(order));
+
+      // Actualizar el estado para indicar que la orden se envió correctamente
+      setStatusOrder(3);
+
+      // Redirigir al usuario a WhatsApp si la comanda se envió correctamente
+      window.open(whatsappLink, "_blank");
+
+      console.log("Comanda enviada correctamente:", response);
+    } catch (error) {
+      console.error("Error al enviar la comanda:", error);
+      // Actualizar el estado para indicar que hubo un error al enviar la orden
+      setStatusOrder(2);
+    }
+  };
+
+  console.log(order);
   return (
     <div>
       <div>
@@ -102,7 +121,6 @@ export default function ModalConfirm({ total }) {
         <DialogTitle className="infoNavi">
           <div>
             <img src={Logo} alt="logo Coqui Cakes" width="100px" />
-      
           </div>
           <div style={{ marginLeft: "30%" }}>
             <button className="exit" onClick={handleClose}>
@@ -115,7 +133,7 @@ export default function ModalConfirm({ total }) {
             Genial, estas a un paso de finalizar tu pedido.
             <br />
             Ayúdanos a tener una mejor atención:
-            <form  className="formPedido">
+            <form className="formPedido">
               <div className="boxPedido">
                 <label htmlFor="telefono">Teléfono:</label>
                 <input
@@ -133,11 +151,14 @@ export default function ModalConfirm({ total }) {
                 {order.telefono && /^\d{10}$/.test(order.telefono) ? (
                   <p className="valid-message">✔️</p>
                 ) : null}
-                {order.telefono && /^\d{10}$/.test(order.telefono) ? null : order.telefono && order.telefono !== "291" && (
-                  <p className="error-message">
-                    Por favor, ingrese un número de teléfono válido.
-                  </p>
-                )}
+                {order.telefono && /^\d{10}$/.test(order.telefono)
+                  ? null
+                  : order.telefono &&
+                    order.telefono !== "291" && (
+                      <p className="error-message">
+                        Por favor, ingrese un número de teléfono válido.
+                      </p>
+                    )}
                 <label htmlFor="name">Nombre Completo:</label>
                 <input
                   className={`telefono-input selectP ${
@@ -166,9 +187,9 @@ export default function ModalConfirm({ total }) {
                 </select>
                 <select
                   className="selectP"
-                  name="tipo_orden"
+                  name="tipo_pedido"
                   onChange={handleOrder}
-                  value={order?.tipo_orden}
+                  value={order?.tipo_pedido}
                 >
                   <option hidden disabled defaultValue value={""}>
                     Delivery o Take Away?
@@ -178,14 +199,16 @@ export default function ModalConfirm({ total }) {
                 </select>
                 <div
                   style={{
-                    display: order?.tipo_orden === "Delivery" ? "flex" : "none",
+                    display:
+                      order?.tipo_pedido === "Delivery" ? "flex" : "none",
                     flexDirection: "column",
                   }}
                 >
                   <label htmlFor="domicilio">Domicilio:</label>
                   <input
                     className={`telefono-input selectP ${
-                      order?.tipo_orden === "Delivery" && order?.domicilio?.length > 7
+                      order?.tipo_pedido === "Delivery" &&
+                      order?.domicilio?.length > 7
                         ? ""
                         : "redX"
                     }`}
@@ -198,31 +221,78 @@ export default function ModalConfirm({ total }) {
                     placeholder="Domicilio para la entrega"
                   />
                 </div>
-               
-                <a className="btnWssp" href={whatsappLink} onClick={e => sendComanda(e)} rel="noreferrer" target="_blank" type="submit">
+
+                {statusOrder === 1 ? (
+                  <button
+                    className="btnWssp"
+                    onClick={sendComanda}
+                    type="button"
+                    target="_blank"
+                  >
                     Enviar Pedido
-                </a>
-            
+                  </button>
+                ) : statusOrder === 2 ? (
+                  <div>
+                    <button
+                      className="btnWssp"
+                      onClick={sendComanda}
+                      type="button"
+                      target="_blank"
+                    >
+                      Enviar Pedido
+                    </button>
+                  
+                    <div style={{display:"flex", alignItems:"center"}}>
+                    ✔️
+                   <p className="orderFail">
+                      Por algún motivo no es posible realizar el pedido.
+                    </p>
+                    ✔️
+                  </div>
+                  </div>
+                ) : statusOrder === 3 ? (
+                  <div style={{display:"flex", alignItems:"center"}}>
+                    ✔️
+                    <p className="orderExito">
+                     Tu pedido fue realizado con éxito 
+                    </p>
+                    ✔️
+                  </div>
+                ) : null}
 
                 {!(
                   /^\d{10}$/.test(order?.telefono) &&
                   order?.name?.length > 3 &&
-                  (order?.tipo_orden === "Take Away" ||
-                    (order?.tipo_orden === "Delivery" && order.domicilio.length > 7)) &&
+                  (order?.tipo_pedido === "Take Away" ||
+                    (order?.tipo_pedido === "Delivery" &&
+                      order.domicilio.length > 7)) &&
                   order?.metodo_de_pago &&
                   order?.total_pedido
                 ) && (
                   <ul style={{ color: "red", marginTop: "10px" }}>
                     {!(order.name.length > 3) && (
-                      <li className="liError">Ingrese un name válido (más de 3 caracteres).</li>
-                    )}
-                    {!(order?.tipo_orden === "Take Away" || (order?.tipo_orden === "Delivery" && order?.domicilio?.length > 7)) && (
                       <li className="liError">
-                        Seleccione una opción válida para el tipo de pedido y, si es Delivery, ingrese una dirección válida.
+                        Ingrese un name válido (más de 3 caracteres).
                       </li>
                     )}
-                    {!order.metodo_de_pago && <li className="liError">Seleccione una forma de pago.</li>}
-                    {!order.total_pedido && <li className="liError">El total del pedido no puede estar vacío.</li>}
+                    {!(
+                      order?.tipo_pedido === "Take Away" ||
+                      (order?.tipo_pedido === "Delivery" &&
+                        order?.domicilio?.length > 7)
+                    ) && (
+                      <li className="liError">
+                        Seleccione una opción válida para el tipo de pedido y,
+                        si es Delivery, ingrese una dirección válida.
+                      </li>
+                    )}
+                    {!order.metodo_de_pago && (
+                      <li className="liError">Seleccione una forma de pago.</li>
+                    )}
+                    {!order.total_pedido && (
+                      <li className="liError">
+                        El total del pedido no puede estar vacío.
+                      </li>
+                    )}
                   </ul>
                 )}
               </div>

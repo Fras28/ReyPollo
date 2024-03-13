@@ -93,15 +93,15 @@ export const dataSlice = createSlice({
       const uniqueComandas = Array.from(uniqueComandasSet).map(id => newComandas.find(comanda => comanda.id === id));
     
       // Ordenar las comandas: false primero, luego true
-      uniqueComandas.sort((a, b) => (a.attributes.Status === b.attributes.Status ? 0 : a.attributes.Status ? 1 : -1));
+      uniqueComandas.sort((a, b) => (a.attributes?.entregado === b.attributes?.entregado ? 0 : a.attributes?.entregado ? 1 : -1));
     
       // Filtrar comandas por Status
-      const comandasTrue = uniqueComandas.filter(comanda => comanda.attributes.Status === true);
-      const comandasFalse = uniqueComandas.filter(comanda => comanda.attributes.Status === false);
+      const comandasTrue = uniqueComandas.filter(comanda => comanda?.attributes?.entregado === true);
+      const comandasFalse = uniqueComandas.filter(comanda => comanda?.attributes?.entregado === false);
     
       return {
         ...state,
-        comandas: [...state.comandas, ...uniqueComandas],
+        comandas: uniqueComandas,
         comandasTrue: comandasTrue,
         comandasFalse: comandasFalse,
       };
@@ -229,7 +229,7 @@ export const asyncSearchBar = (string) => {
 
 
 
-export const asyncOrder = ({ total_pedido, metodo_de_pago, pedido, name, detalle, tipo_orden, telefono, domicilio }) => {
+export const asyncOrder = ({ metodo_de_pago, pedido, tipo_pedido, name, detalle, total_pedido, telefono, domicilio }) => {
   return async function (dispatch, getState) {
     try {
       // Use getState to retrieve the current state
@@ -240,12 +240,10 @@ export const asyncOrder = ({ total_pedido, metodo_de_pago, pedido, name, detalle
       const CreatedBy = IDENTIFIERU;
       
       // Remove the unnecessary nesting of the 'data' property
-      const data = {data:{ total_pedido, metodo_de_pago, pedido, name, detalle, tipo_orden, telefono, domicilio }};
-
-
+      const data = { data: { metodo_de_pago, pedido, name, tipo_pedido, detalle, total_pedido, telefono, domicilio } };
 
       // Perform the API request with the Authorization header
-      await axios.post(API_ORDER, data, {
+      const response = await axios.post(API_ORDER, data, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${clave}`, // Use clave from the state
@@ -253,12 +251,14 @@ export const asyncOrder = ({ total_pedido, metodo_de_pago, pedido, name, detalle
       });
 
       console.log("posteado correctamente, sliceee");
-      return dispatch();
+      return response.data; // Devuelve la respuesta del servidor
     } catch (error) {
       console.log(error, "from Order");
+      throw error; // Lanza el error para ser manejado en el componente
     }
   };
 };
+
 
 
 
@@ -340,7 +340,7 @@ export const asyncPedidoRealizado = (comanda) => {
       // Modifica solo el estado de la propiedad 'Status' a true o false
       const updatedComanda = {
         ...comanda.attributes,
-        Status: !comanda.attributes.Status,
+        entregado: !comanda.attributes.entregado,
       };
 
       const response = await axios.put(`${API_ORDER}/${comanda.id}`, { data: updatedComanda }, {
@@ -354,8 +354,8 @@ export const asyncPedidoRealizado = (comanda) => {
       await dispatch(asyncComandas());
 
       // Actualiza los estados comandasTrue y comandasFalse
-      const updatedComandasTrue = getState().alldata.comandas.filter(comanda => comanda.attributes.Status === true);
-      const updatedComandasFalse = getState().alldata.comandas.filter(comanda => comanda.attributes.Status === false);
+      const updatedComandasTrue = getState().alldata.comandas.filter(comanda => comanda.attributes.entregado === true);
+      const updatedComandasFalse = getState().alldata.comandas.filter(comanda => comanda.attributes.entregado === false);
 
       toast.success("Pedido realizado successfully!");
       return dispatch(fillComanda(response?.data?.data, updatedComandasTrue, updatedComandasFalse));

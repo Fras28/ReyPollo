@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Comander.css";
 import { asyncComandas, asyncPedidoRealizado } from "../redux/slice";
-import LoginComponent from "./LogIn";
+import LogIN from "../BtnNavidad/LogIn";
+import LogIn from "../BtnNavidad/LogIn";
 
 const ComandasComponent = () => {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ const ComandasComponent = () => {
 
   return (
     <div className="comandas-container">
-      <LoginComponent />
+      <LogIn />
       <h2 className="comandas-title">Comandas en Tiempo Real</h2>
       <h3>Total de pedidos {comandas.length}</h3>
       <h3>
@@ -78,13 +79,13 @@ const ComandasComponent = () => {
                 Teléfono:
               </label>
               <span className="comanda-value">{comanda.attributes.Phone}</span>
-              {comanda.attributes.Adress ? (
+              {comanda.attributes.domicilio ? (
                 <>
                   <label className="comanda-label" htmlFor="phone">
                     Direccion:
                   </label>
                   <span className="comanda-value">
-                    {comanda.attributes.Adress}
+                    {comanda.attributes.domicilio}
                   </span>
                 </>
               ) : (
@@ -94,29 +95,29 @@ const ComandasComponent = () => {
               )}
             </div>
             <div className="comanda-details">
-              <label className="comanda-label" htmlFor="order">
+              <label className="comanda-label" htmlFor="pedido">
                 Pedido:
               </label>
-              <div className="order-items">
-                {comanda.attributes.Order.split(",").map((item, index) => (
-                  <div key={index} className="order-item">
+              <div className="pedido-items">
+                {comanda.attributes.pedido.split(",").map((item, index) => (
+                  <div key={index} className="pedido-item">
                     {item.trim()}
                   </div>
                 ))}
               </div>
             </div>
             <div className="comanda-details">
-              <label className="comanda-label" htmlFor="order-total">
+              <label className="comanda-label" htmlFor="pedido-total">
                 Total:
               </label>
               <span className="comanda-value">
-                ${comanda.attributes.Order_total}
+                ${comanda.attributes.pedido_total}
               </span>
             </div>
             <div className="comanda-details" backgroundColor="green">
               {loadingComandas.includes(comanda.attributes.id) ? (
                 <div className="spinner">Cargando...</div>
-              ) : comanda.attributes.Status ? (
+              ) : comanda.attributes.entregado ? (
                 <button className="BtnComander" onClick={() => HandleEntrega(comanda)}>
                   Regenerate
                 </button>
@@ -144,13 +145,13 @@ const ComandasComponent = () => {
                 Teléfono:
               </label>
               <span className="comanda-value">{comanda.attributes.Phone}</span>
-              {comanda.attributes.Adress ? (
+              {comanda.attributes.domicilio ? (
                 <>
                   <label className="comanda-label" htmlFor="phone">
                     Direccion:
                   </label>
                   <span className="comanda-value">
-                    {comanda.attributes.Adress}
+                    {comanda.attributes.domicilio}
                   </span>
                 </>
               ) : (
@@ -160,27 +161,27 @@ const ComandasComponent = () => {
               )}
             </div>
             <div className="comanda-details">
-              <label className="comanda-label" htmlFor="order">
+              <label className="comanda-label" htmlFor="pedido">
                 Pedido:
               </label>
-              <div className="order-items">
-                {comanda.attributes.Order.split(",").map((item, index) => (
-                  <div key={index} className="order-item">
+              <div className="pedido-items">
+                {comanda.attributes.pedido.split(",").map((item, index) => (
+                  <div key={index} className="pedido-item">
                     {item.trim()}
                   </div>
                 ))}
               </div>
             </div>
             <div className="comanda-details">
-              <label className="comanda-label" htmlFor="order-total">
+              <label className="comanda-label" htmlFor="pedido-total">
                 Total:
               </label>
               <span className="comanda-value">
-                ${comanda.attributes.Order_total}
+                ${comanda.attributes.pedido_total}
               </span>
             </div>
             <div className="comanda-details" backgroundColor="green">
-              {comanda.attributes.Status ? (
+              {comanda.attributes.entregado ? (
                 <button
                   className="BtnComander"
                   onClick={() => HandleEntrega(comanda)}

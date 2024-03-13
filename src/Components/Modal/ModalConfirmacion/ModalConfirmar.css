@@ -47,3 +47,14 @@
 .liError{
     font-size: 12px;
 }
+
+.orderExito{
+    border-radius: 8px;
+    background-color: green;
+    padding: 0.5rem;
+}
+.orderFail{
+    border-radius: 8px;
+    background-color: red;
+    padding: 0.5rem;
+}
