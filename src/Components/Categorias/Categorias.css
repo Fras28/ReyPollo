@@ -77,7 +77,10 @@
   background-color: #fcac009d;
   border-radius: orange;
 }
-
+.containerL {
+  padding-top: 0;
+  background-image:url("../assets/bgMadre2.png");
+}
 /* display: flex;
 
 width: 84px;
@@ -100,6 +103,6 @@ border-radius: 24px; */
   }
   .containerL {
     padding-top: 0;
-    background-image:url("../assets/bgMadre2.png");
+
   }
 }
