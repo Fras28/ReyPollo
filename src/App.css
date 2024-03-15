@@ -8,7 +8,7 @@ font-family: 'Sono', sans-serif; */
 
 .App {
   text-align: center;
-  background-image:url("../src/Components/assets/bgMadre2.jpg");
+  background-image:url("../src/Components/assets/bgMadre2.png");
   min-height: 100vh;
 
 }
@@ -21,6 +21,11 @@ font-family: 'Sono', sans-serif; */
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
+  }
+  .App {
+    background-image:url("../src/Components/assets/bgMadre2.png");
+    min-height: 100vh;
+  background-size: cover;
   }
 }
 
@@ -43,5 +48,6 @@ font-family: 'Sono', sans-serif; */
   to {
     transform: rotate(360deg);
   }
+  
 }
 

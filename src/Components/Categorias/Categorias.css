@@ -1,13 +1,14 @@
 .titleSection {
   font-size: 20px;
-  color: black;
+  color: goldenrod;
   font-family: "Montserrat", sans-serif;
   gap: 1rem;
   display: flex;
   justify-content: flex-start;
-  font-weight: 600;
+  font-weight: 800;
   align-items: center;
-  background-color: rgba(34, 139, 34, 0.594);
+  background-image: url("../assets/bgNav.png");
+  padding: .5rem;
 }
 
 .cafeBg {
@@ -99,6 +100,6 @@ border-radius: 24px; */
   }
   .containerL {
     padding-top: 0;
-    
+    background-image:url("../assets/bgMadre2.png");
   }
 }
