@@ -1,8 +1,7 @@
 .titleSection {
   font-size: 20px;
-  color: white;
+  color: orange;
   font-family: "Montserrat", sans-serif;
-  gap: 1rem;
   display: flex;
   justify-content: flex-start;
   font-weight: 600;
@@ -10,6 +9,7 @@
   background-image: url("../assets/bgNav.png");
   padding: .5rem;
   border-bottom:  1px solid orange;
+  gap: 1rem;
 }
   
 .containerL {
