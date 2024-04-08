@@ -10,7 +10,7 @@ font-family: 'Sono', sans-serif; */
   text-align: center;
   background-image:url("../src/Components/assets/bgMadre2.png");
   min-height: 100vh;
-
+  background-position: center;
 }
 
 .App-logo {
@@ -24,7 +24,8 @@ font-family: 'Sono', sans-serif; */
   .App {
     background-image:url("../src/Components/assets/bgMadre2.png");
     min-height: 100vh;
-    /* background-size: cover; */
+    background-size: cover; 
+     background-position: unset;
   }
 }
 
