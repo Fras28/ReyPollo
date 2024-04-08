@@ -47,8 +47,8 @@ const Location = <svg width="30" viewBox="0 0 100 100" fill="none" xmlns="http:/
       }`}
     >
       <div className="landingStart">
-        <img src={CtaDNI} alt="" width="100%" />
-
+      
+<div style={{width:"100%"}}> <p className="titleSection" style={{justifyContent:"center", outline:"solid gold 2px", border:"none"}} >Consulta por nuestros desayunos y meriendas libres</p> </div>
         <div className="BottomLanding">
           <div>
             <AlertDialogSlide />
