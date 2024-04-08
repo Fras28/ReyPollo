@@ -1,0 +1,137 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+  }
+
+  
+  /* Estilos del modal */
+  .modal-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+.toggle-password{
+  padding: 0;
+  background-color: transparent;
+  
+}
+  
+
+
+  
+
+
+
+
+  /* Estilos del botón de cierre del modal */
+  .modal-close {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .modal-close:hover {
+    background-color: #c0392b;
+  }
+  /* Media query para dispositivos móviles */
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* LoginComponent.css */
+
+/* Fondo del modal */
+.bgModal {
+  background-color: rgba(0, 0, 0, 0.5); /* Un fondo oscuro semi-transparente */
+  overflow: hidden;
+}
+
+/* Contenedor principal del formulario de inicio de sesión */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+  background-color: #282A36;
+}
+
+/* Estilos para la sección izquierda del formulario */
+.leftLogin {
+  flex: 1;
+  padding: 5em;
+}
+
+
+/* Estilos para la sección derecha del formulario */
+.rightLogin {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  max-height: 100%;
+}
+
+/* Estilos para el encabezado del formulario */
+.login-heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Estilos para los campos de entrada */
+.form-group {
+  margin-bottom: 40px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+}
+
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Estilos para el botón de inicio de sesión */
+.login-submit {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff; /* Color de fondo azul */
+  color: #fff; /* Color del texto blanco */
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-submit:hover {
+  background-color: #0056b3; /* Cambia el color de fondo al pasar el mouse */
+}

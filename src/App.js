@@ -13,13 +13,15 @@ import {
   asyncAllProducts,
   asyncCategorias,
   asyncComercio,
+  asyncSubCategorias,
   asyncUser,
 } from "./Components/redux/slice.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import store, { saveStateToLocalStorage } from "./Components/redux/store.jsx";
 import { ToastContainer } from "react-toastify";
-import ComandasComponent from "./Components/Comander/Comander.jsx";
+
 import { CompSubCat } from "./Components/Categorias/CompSubCat.jsx";
+import { AdminPanel } from "./Components/Comander/AdminPanel.jsx";
 // import { Bag } from './Components/Categorias/Bag.jsx';
 
 function App() {
@@ -38,6 +40,7 @@ function App() {
       console.log("Effect is running");
       dispatch(asyncAllProducts());
       dispatch(asyncComercio());
+      dispatch(asyncSubCategorias());
       dispatch(asyncCategorias());
       dispatch(asyncUser());
       // Aquí colocas tu lógica de carga de datos
@@ -54,6 +57,7 @@ function App() {
   return (
     <div className="App">
       <Switch>
+      <Route exact path="/Comander" component={AdminPanel}/>
         <Route exact path="/:id?" component={Inicio} />
         <Route exact path="/:id/Landing" component={LandingPage} />
         {categorias.map((cat) => (
@@ -66,7 +70,7 @@ function App() {
         <Route
           exact
           path="/:id/Landing/Comander"
-          component={ComandasComponent}
+          component={AdminPanel}
         />
         <Route exact path="/:id/bag" component={BagXX} />
       </Switch>

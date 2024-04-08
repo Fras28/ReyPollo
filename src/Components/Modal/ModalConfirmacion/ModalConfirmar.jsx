@@ -101,7 +101,7 @@ export default function ModalConfirm({ total }) {
   console.log(order);
   return (
     <div>
-      <div >
+      <div>
         <button onClick={handleClickOpen} className="btnWssp low">
           Enviar Pedido
         </button>

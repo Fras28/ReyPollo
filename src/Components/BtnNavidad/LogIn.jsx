@@ -20,12 +20,13 @@ const LogIn = ({ onLoginSuccess }) => {
     password: ""
   });
   const dispatch = useDispatch();
-  const {usuarioComander} = useSelector((state) => state.alldata);
-
+  const { usuarioComander } = useSelector((state) => state.alldata);
 
   useEffect(() => {
     if (!usuarioComander) {
       setOpen(true);
+    } else {
+      setOpen(false);
     }
   }, [usuarioComander]);
 
@@ -43,15 +44,12 @@ const LogIn = ({ onLoginSuccess }) => {
     }
   };
 
-  const handleLogin = () => {
-    dispatch(asyncLogIn(credentials));
-  };
-
-  useEffect(() => {
-    if (usuarioComander) {
+  const handleLogin = async () => {
+    const success = await dispatch(asyncLogIn(credentials));
+    if (success) {
       setOpen(false);
     }
-  }, [usuarioComander]);
+  };
 
   return (
     <div className="btnNav">

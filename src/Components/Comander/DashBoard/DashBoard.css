@@ -1,0 +1,55 @@
+.card-body {
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 24px;
+    border: solid green 2px;
+
+  }
+  
+  .row {
+    gap: 2rem;
+  }
+  
+  .containerDash {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contCharts {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+    margin-bottom: .5rem;
+  }
+  
+  /* Ajusta el tamaño del contenedor del gráfico */
+  #chart {
+    width: 350px; /* Ajusta el ancho según sea necesario */
+    height: 350px; /* Ajusta la altura según sea necesario */
+  }
+  
+  /* Establece un ancho mínimo para el gráfico */
+  .apexcharts-canvas {
+    min-width: 300px; /* Establece un ancho mínimo para el gráfico */
+    min-height: 300px; /* Establece una altura mínima para el gráfico */
+  }
+  
+
+
+  .buttonDash {
+    color: #090909;
+    padding: 0.7em 1.7em;
+    font-size: 18px;
+    border-radius: 0.5em;
+    background: #e8e8e8;
+    cursor: pointer;
+    border: 1px solid #e8e8e8;
+    transition: all 0.3s;
+  }
+  
+  button:active {
+    color: #666;
+    box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+  }

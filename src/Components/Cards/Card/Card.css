@@ -6,6 +6,9 @@
   font-family: "Montserrat", sans-serif;
   font-weight: 200;
 }
+.nameProdEdit{
+  font-size: 1rem;
+}
 .detProd {
   color: black;
   text-align: left;
@@ -24,7 +27,7 @@
   display: flex;
   gap: 0.5rem;
 }
-.divBtnProd{
+.divBtnProd {
   width: 90px;
   height: 44px;
   align-items: center;
@@ -39,11 +42,12 @@
   color: green;
   font-weight: 600;
   background-color: rgb(255, 255, 255);
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
 .btnPlus:active {
-  background-color: #E88A23;
+  background-color: #e88a23;
 }
 
 .leftInfo {
@@ -58,20 +62,18 @@
   align-items: center;
   justify-content: space-around;
   border-radius: 16px;
-  background-color: #E88A23;
-  border: outset #E88A23 2px;
+  background-color: #e88a23;
+  border: outset #e88a23 2px;
   width: 100%;
   height: 100%;
 }
-.masMenos:hover{
-    border: inset #E88A23 2px;
+.masMenos:hover {
+  border: inset #e88a23 2px;
 }
 
 .masMenos > button {
   border: none;
   background-color: transparent;
-  /* width: 60px;
-  height: 44px; */
   color: white;
   font-weight: 600;
   font-size: 1rem;
@@ -93,15 +95,26 @@
   display: flex;
   justify-content: space-between;
   margin-top: 1rem;
-  box-shadow: 0px 0px 8px #FDAB97;
-  padding: 1rem 0.8rem;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  box-shadow: 0px 0px 8px #fdab97;
+  padding: 1rem 0.3rem 1rem 0.3rem;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
-.price{
-margin: 0;
-font-family: "Montserrat", sans-serif;
+.contCardEdit {
+  align-items: center;
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: flex-start;
+text-wrap: nowrap;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+  rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  overflow: hidden;
+}
+.price {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
-  color:rgb(107, 48, 48);
+  color: rgb(107, 48, 48);
 }
 .btn-svg {
   display: flex;
@@ -116,10 +129,10 @@ font-family: "Montserrat", sans-serif;
   height: 100%;
 }
 .svg-minus,
-  .svg-plus {
-    width: 100%;
-    height: auto;
-  }
+.svg-plus {
+  width: 100%;
+  height: auto;
+}
 /* Estilos para el iPhone 11 Pro */
 @media (max-width: 375px) {
   .btn-svg {
@@ -127,5 +140,34 @@ font-family: "Montserrat", sans-serif;
     height: 10px;
     margin-right: 0px;
   }
+}
 
+
+
+/* +----------------------------------- CARD EDIT ------------------------------------+ */
+
+.contCardEdit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.cardContentEdit {
+  flex-grow: 1;
+}
+
+.nameProdEdit {
+  font-weight: bold;
+}
+
+.priceEdit {
+  margin-top: 5px;
+}
+
+.divBtnProd {
+  margin-left: 10px;
 }

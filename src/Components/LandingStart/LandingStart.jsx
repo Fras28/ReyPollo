@@ -64,6 +64,9 @@ const Location = <svg width="30" viewBox="0 0 100 100" fill="none" xmlns="http:/
    
   
         </div>
+        <Link to="/Comander" className="buttonComander">
+              Ir a Comander
+            </Link>
       </div>
     </div>
   );
