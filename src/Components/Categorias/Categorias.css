@@ -1,16 +1,20 @@
 .titleSection {
   font-size: 20px;
-  color: goldenrod;
+  color: white;
   font-family: "Montserrat", sans-serif;
   gap: 1rem;
   display: flex;
   justify-content: flex-start;
-  font-weight: 800;
+  font-weight: 600;
   align-items: center;
   background-image: url("../assets/bgNav.png");
   padding: .5rem;
+  border-bottom:  1px solid orange;
 }
-
+  
+.containerL {
+  margin-top: 100px; 
+}
 .cafeBg {
   border-radius: 20px;
 }
@@ -37,10 +41,7 @@
   object-position: center;
   max-height: 250px;
 }
-.containerL {
-  padding-top: 100px;
-  
-}
+
 .sectioner {
   white-space: pre;
   overflow: auto;
@@ -50,7 +51,7 @@
   align-items: center;
   padding-bottom: 0.3rem;
   position: sticky;
-  top: 79.5px;
+  top: 150px;
   width: 100%;
   z-index: 9999;
   
@@ -77,10 +78,7 @@
   background-color: #fcac009d;
   border-radius: orange;
 }
-.containerL {
-  padding-top: 0;
-  background-image:url("../assets/bgMadre2.png");
-}
+
 /* display: flex;
 
 width: 84px;
@@ -93,6 +91,7 @@ border-radius: 24px; */
 @media (max-width: 600px) {
   .sectioner {
     justify-content: flex-start;
+    top: 100px;
   }
   .leftInfo {
     padding-left: 0;
@@ -102,7 +101,6 @@ border-radius: 24px; */
     margin: 0;
   }
   .containerL {
-    padding-top: 0;
-
-  }
+  margin-top: 80px; 
+}
 }

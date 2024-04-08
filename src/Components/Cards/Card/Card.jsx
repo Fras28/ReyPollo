@@ -39,10 +39,10 @@ export const Card = ({ producto }) => {
     <div className="contCard">
       <div className="leftInfo">
         <h2 className="nameProd">{product.name}</h2>
-        <p className="price">${product.price}</p>
         <p className="detProd">{product.detail}</p>
+        <p className="price">${product.price}</p>
       </div>
-      <div className="rightInfo">
+      {/* <div className="rightInfo">
         <div className="divBtnProd">
           {thisFav.length === 0 ? (
             <button className="btnPlus" onClick={artAdd}>
@@ -60,7 +60,7 @@ export const Card = ({ producto }) => {
             </div>
           )}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

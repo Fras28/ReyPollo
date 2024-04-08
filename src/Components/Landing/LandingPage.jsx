@@ -70,26 +70,26 @@ export default function LandingPage(url) {
       </div>
 
       <div className="conteinerLB2  ">
-        <div className="rowsCardL">
-          {categoriasConProductos?.map((categoria) => (
-            <NavLink
-              className="navLink"
-              to={
-                url.location.pathname === "/"
-                  ? `/${categoria.attributes?.name}`
-                  : `${url.location.pathname}/${categoria.attributes?.name}`
-              }
-            >
-              <div className="titInicio">
-                <img
-                  src={categoria?.attributes?.picture?.data || Logo}
-                  alt="fotito"
-                />
-                <p>{categoria?.attributes?.name}</p>
-              </div>
-            </NavLink>
-          ))}
-        </div>
+      <div className="rowsCardL">
+  {categoriasConProductos?.map((categoria, index) => (
+    <NavLink
+      className={`navLink `}
+      to={
+        url.location.pathname === "/"
+          ? `/${categoria.attributes?.name}`
+          : `${url.location.pathname}/${categoria.attributes?.name}`
+      }
+    >
+      <div className={`titInicio ${index === categoriasConProductos.length - 1 && index % 2 === 0 ? 'fullWidth' : ''}`}>
+        <img
+          src={categoria?.attributes?.picture?.data || Logo}
+          alt="fotito"
+        />
+        <p>{categoria?.attributes?.name}</p>
+      </div>
+    </NavLink>
+  ))}
+</div>
       </div>
       <div className="navi2">
         <svg

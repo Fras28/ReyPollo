@@ -17,17 +17,17 @@ font-family: 'Sono', sans-serif; */
   height: 40vmin;
   pointer-events: none;
 }
-
-@media (prefers-reduced-motion: no-preference) {
+@media screen and (max-width: 768px) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
   .App {
     background-image:url("../src/Components/assets/bgMadre2.png");
     min-height: 100vh;
-  background-size: cover;
+    /* background-size: cover; */
   }
 }
+
 
 .App-header {
   background-color: #282c34;
@@ -48,6 +48,7 @@ font-family: 'Sono', sans-serif; */
   to {
     transform: rotate(360deg);
   }
+  
   
 }
 

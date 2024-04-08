@@ -11,12 +11,15 @@ const initialState = {
   copyallProducts: [],
   favProd: [],
   categorias:[],
+  subCategorias:[],
   comercio:[],
   clave:"",
   comandas:[],
   comandasTrue:[],
   comandasFalse:[],
   usuarioComander:"",
+  proveedor:[],
+  egregos:[],
 };
 
 
@@ -35,6 +38,13 @@ export const dataSlice = createSlice({
       return {
         ...state,
         categorias: action.payload,
+      };
+    },
+
+    allSubCategorias: (state, action) => {
+      return {
+        ...state,
+        subCategorias: action.payload,
       };
     },
     fillComercio: (state, action) => {
@@ -59,6 +69,12 @@ export const dataSlice = createSlice({
       return {
         ...state,
         usuarioComander: action.payload,
+      };
+    },
+    fillProvee: (state, action) => {
+      return {
+        ...state,
+        proveedor: action.payload,
       };
     },
     cancelBagProducts: (state, action) => {
@@ -128,11 +144,18 @@ const API_STRAPI_ARTICTULOS = process.env.REACT_APP_API_STRAPI_ARTICTULOS;
 const API_CATEGORIAS = process.env.REACT_APP_API_STRAPI_CATEGORIAS;
 const API_COMERCIO = process.env.REACT_APP_API_STRAPI_COMERCIOS;
 const API_ORDER = process.env.REACT_APP_API_ORDER;
+const API_PROVE = process.env.REACT_APP_API_POVEEDOR;
 const jwtSecret = process.env.JWT_SECRET;
 const API_US = process.env.REACT_APP_API_USERS;
 const IDENTIFIERU = process.env.REACT_APP_IDENTIFIER;
 const PASSWORDU = process.env.REACT_APP_PASSWORD;
+const API_SUBCAT= process.env.REACT_APP_API_STRAPI_SUBCATEGORIAS;
+const API_GENERAL = process.env.REACT_APP_API_STRAPI;
+const MADRE_MAIL = process.env.REACT_APP_API_MAIL
+const MADRE_PASS = process.env.REACT_APP_MADREPASS;
 
+
+const comercio = 2;
 export const asyncAllProducts = () => {
   return async function (dispatch) {
     try {
@@ -147,6 +170,7 @@ export const asyncAllProducts = () => {
         const response = await axios.get(`${API_STRAPI_ARTICTULOS}`, {
           params: { pagination },
         });
+    
 
         if (!response.data.data || response.data.data.length === 0) {
           // Si no hay más datos, salir del bucle
@@ -159,7 +183,9 @@ export const asyncAllProducts = () => {
             item.attributes?.sub_categoria?.data &&
             item.attributes?.sub_categoria?.data?.id &&
             item.attributes?.categorias?.data &&
-            item.attributes?.categorias?.data?.id
+            item.attributes?.categorias?.data?.id &&
+            item.attributes?.comercio?.data &&
+            item.attributes?.comercio?.data?.id === comercio // Filtrar por el id del comercio igual a 1
         );
 
         // Agregar los datos filtrados de la página actual al conjunto total
@@ -176,7 +202,6 @@ export const asyncAllProducts = () => {
       }
 
       // Despachar la acción con la información completa
-    
       return dispatch(allProducts(allData));
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -187,23 +212,48 @@ export const asyncComercio = () => {
   return async function (dispatch) {
     try {
       const response = await axios.get(API_COMERCIO);
-      return dispatch(fillComercio(response.data.data));
+      const comercioFiltrado = response.data.data.find(comercioData => comercioData.id === comercio); // Buscar el comercio con el id igual al valor de la constante comercio
+      if (comercioFiltrado) {
+        return dispatch(fillComercio(comercioFiltrado));
+      } else {
+        console.error("No se encontró el comercio con el ID especificado.");
+      }
     } catch (error) {
       console.error("Error fetching data comercio:", error);
     }
   };
 };
+
 export const asyncCategorias = () => {
   return async function (dispatch) {
     try {
       const response = await axios.get(API_CATEGORIAS);
-      const categoriasOrdenadas = response.data.data.sort((a, b) => a.id - b.id);
-      return dispatch(allCategorias(response.data.data));
+      const categoriasFiltradas = response.data.data.filter(categoria => categoria.attributes.comercio.data.id === comercio); // Filtrar las categorías cuyo comercio tenga el id igual al valor de la constante comercio
+      const categoriasOrdenadas = categoriasFiltradas.sort((a, b) => a.id - b.id); // Ordenar las categorías filtradas
+      return dispatch(allCategorias(categoriasOrdenadas));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 };
+
+
+
+export const asyncSubCategorias = () => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(API_SUBCAT);
+      const subCategoriasFiltradas = response.data.data.filter(subCategoria => subCategoria.attributes.comercio.data.id === comercio); // Filtrar las subcategorías cuyo comercio tenga el id igual al valor de la constante comercio
+      const subCategoriasOrdenadas = subCategoriasFiltradas.sort((a, b) => a.id - b.id); // Ordenar las subcategorías filtradas
+      return dispatch(allSubCategorias(subCategoriasOrdenadas));
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+};
+
+
+
 
 export const asyncfavProducts = (pedido) => {
   return async function (dispatch) {
@@ -217,6 +267,7 @@ export const asyncfavProducts = (pedido) => {
     }
   };
 };
+
 export const asyncCancelFav = (pedido) => {
   return async function (dispatch) {
     try {
@@ -237,8 +288,6 @@ export const asyncSearchBar = (string) => {
     return dispatch(SearchProducts(string));
   };
 };
-
-
 
 export const asyncOrder = ({ metodo_de_pago, pedido,tipo_pedido, name, detalle, total_pedido, telefono, domicilio }) => {
   return async function (dispatch, getState) {
@@ -268,6 +317,34 @@ export const asyncOrder = ({ metodo_de_pago, pedido,tipo_pedido, name, detalle, 
     }
   };
 };
+
+
+export const asyncProveedor = ({ name, telefono, email, direccion }, setStatusOrder) => {
+  return async function (dispatch, getState) {
+    try {
+      // Use getState to retrieve the current state
+      const initialState = getState();
+      // Access the clave from the state
+      const clave = initialState?.alldata?.clave;      
+      // Remove the unnecessary nesting of the 'data' property
+      const data = { name, telefono, email, direccion };
+      // Perform the API request with the Authorization header
+      await axios.post(API_PROVE, data, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${clave}`, // Use clave from the state
+        },
+      });
+
+      console.log("posteado correctamente, Proveedor");
+      // Actualizar el estado para indicar que la orden se envió correctamente
+      setStatusOrder(3);
+    } catch (error) {
+      console.log(error, "from Order");
+    }
+  };
+};
+
 
 
 
@@ -311,6 +388,31 @@ export const asyncLogIn = ({email,password}) => {
 
 
 
+export const asyncEditProd = (data) => {
+  return async function (dispatch, getState) {
+    const initialState = getState();
+    const usuarioComander = initialState?.alldata?.usuarioComander;
+
+    try {
+  
+      const response = await axios.put(API_GENERAL.concat(`/api/articulos/${data.data.id}`), data, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${usuarioComander}`,
+        },
+      });
+      console.log("producto editado creo q correctamente")
+console.log(response);
+      return  asyncAllProducts();
+    } catch (error) {
+      console.error("Error fetching data EditProd Slice:", error);
+    }
+  };
+};
+
+
+
+
 
 export const asyncComandas = () => {
   return async function (dispatch, getState) {
@@ -327,7 +429,6 @@ export const asyncComandas = () => {
         },
       });
 
-      console.log(response.data.data, "antes de enviarlo asyncComandas");
 
       return dispatch(fillComanda(response?.data?.data));
     } catch (error) {
@@ -337,6 +438,35 @@ export const asyncComandas = () => {
   };
 };
 
+
+
+
+
+export const asyncGetProv = () => {
+
+  return async function (dispatch, getState) {
+    try {
+      const initialState = getState();
+    
+      const usuarioComander = initialState?.alldata?.usuarioComander;
+ 
+
+      const response = await axios.get(API_PROVE, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${usuarioComander}`,
+        },
+      });
+
+
+
+      return dispatch(fillProvee(response?.data?.data));
+    } catch (error) {
+      console.error('Error al obtener comandas:', error);
+      // Puedes dispatchar una acción para manejar el error según tus necesidades
+    }
+  };
+};
 
  
 
@@ -374,11 +504,18 @@ export const asyncPedidoRealizado = (comanda) => {
       toast.error("Error during pedido realizado. Please try again.");
     }
   };
+
+
+
+
+
+
+  
 };
 
 //----------------------------------------------------------------------------------------------------------------
 
-export const { allProducts, favProducts, cancelBagProducts, SearchProducts, allCategorias, fillComercio, fillClave, fillComanda,fillUsuario } =
+export const { allProducts, favProducts, cancelBagProducts, SearchProducts, allCategorias,allSubCategorias, fillComercio, fillClave, fillComanda,fillUsuario, fillProvee } =
   dataSlice.actions;
 
 export default dataSlice.reducer;
