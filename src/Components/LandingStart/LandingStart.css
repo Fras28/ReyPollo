@@ -210,7 +210,10 @@
     margin-top: 6rem;
   }
 
-
+.buttonComander{
+  visibility: hidden;
+  display: none;
+}
   .LandingBack {
     background-image: url("../assets/bgMadre2.png");
     background-repeat: no-repeat;
