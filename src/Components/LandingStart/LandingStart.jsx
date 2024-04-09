@@ -48,18 +48,18 @@ const Location = <svg width="30" viewBox="0 0 100 100" fill="none" xmlns="http:/
     >
       <div className="landingStart">
       
-<div style={{width:"100%"}}> <p className="titleSection" style={{justifyContent:"center", outline:"solid gold 2px", border:"none"}} >Consulta por nuestros desayunos y meriendas libres</p> </div>
+<div style={{width:"100%"}}> <p className="titleSection" style={{justifyContent:"center", outline:"solid white 2px", border:"none"}} >Consulta por nuestros desayunos y meriendas libres</p> </div>
         <div className="BottomLanding">
-          <div>
+          <div style={{paddingTop:"5rem"}}>
             <AlertDialogSlide />
        
           </div>
        
           <div className="btnEnter" onClick={handleButtonClick}>
-          <a style={{color:"blue", fontWeight:"600", fontSize:"24px"}} href="https://www.google.com/maps/dir//DIRECCION+cafe+madre/@-38.7186808,-62.3059703,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x95edbd007363273b:0x236c527b644bb0b!2m2!1d-62.264685!2d-38.718755?entry=ttu" target="_blank">{Location} <b>Alsina 23</b></a>
       
             {/* <ButtonEnter titulo="Ver Catalogo" /> */}
           <button className="Btn" />
+          <a style={{ fontWeight:"600", fontSize:"24px"}} href="https://www.google.com/maps/dir//DIRECCION+cafe+madre/@-38.7186808,-62.3059703,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x95edbd007363273b:0x236c527b644bb0b!2m2!1d-62.264685!2d-38.718755?entry=ttu" target="_blank">{Location} <b>Alsina 23</b></a>
           </div>
    
   

@@ -27,17 +27,13 @@ const ComandasComponent = () => {
         console.error("Error al obtener comandas:", error);
       }
     };
-
+  
     if (usuarioComander) {
       obtenerComandas();
     }
-
-    const intervalId = setInterval(() => {
-      obtenerComandas();
-    }, 15000);
-
-    return () => clearInterval(intervalId);
+  
   }, [!usuarioComander, comandas, comandasTrue, comandasFalse, dispatch]);
+  
 
  
   return (

@@ -114,14 +114,14 @@ const logo = <svg width="300" viewBox="0 0 699 457" fill="none" xmlns="http://ww
 
   return (
     <div style={{ height:"100%"  }}>
-      <div style={{ border: "solid grey 2px",height:"75%"  }}>
+      <div style={{ border: "solid grey 2px",height:"75%", backgroundColor:"rgba(255, 255, 255, 0.503)"  }}>
         <h2 className="titleEditor">Comandas en Tiempo Real</h2>
         <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
 
         <input type="date" id="fechaInput" />
 
-        <h3  style={{ color: "white" }} >Total de pedidos {comandas.length} | </h3>
-        <h3 style={{ color: "white" }}>
+        <h3  style={{ color: "black" }} >Total de pedidos {comandas.length} | </h3>
+        <h3 style={{ color: "black" }}>
         Pedido sin
           entregar {comandasFiltradasFalse.length} |  Pedidos realizados {comandasFiltradasTrue.length}
         </h3>

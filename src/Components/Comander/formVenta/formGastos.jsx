@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import "./formVenta.css";
-import ModalProveedor from '../../Modal/ModalConfirmacion/Modal';
+
+import ModalGen from '../../Modal/ModalConfirmacion/Modal';
+
+import NuevoProveedor from '../../Modal/ModalConfirmacion/ModalProveedor';
 
 
 
@@ -31,7 +34,7 @@ const FormularioGastos = () => {
           value={nombreProveedor}
           onChange={(e) => setNombreProveedor(e.target.value)}
           required
-        /> <ModalProveedor/>
+        /> <ModalGen  Child={<NuevoProveedor/>}  txtBtn="Nuevo Proveedor"/>
       </div>
       <div >
         <label htmlFor="totalVenta"  className='nombreProveedor'>Total $:</label>

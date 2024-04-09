@@ -1,14 +1,13 @@
 .titleSection {
   font-size: 20px;
-  color: orange;
+  color: gold;
   font-family: "Montserrat", sans-serif;
   display: flex;
   justify-content: flex-start;
   font-weight: 600;
   align-items: center;
-  background-image: url("../assets/bgNav.png");
+  background-color: #375A39;
   padding: .5rem;
-  border-bottom:  1px solid orange;
   gap: 1rem;
 }
   
@@ -40,6 +39,7 @@
   object-fit: cover;
   object-position: center;
   max-height: 250px;
+
 }
 
 .sectioner {
