@@ -59,10 +59,13 @@ const Location = <svg width="30" viewBox="0 0 100 100" fill="none" xmlns="http:/
       
             {/* <ButtonEnter titulo="Ver Catalogo" /> */}
           <button className="Btn" />
-          <a style={{ fontWeight:"600", fontSize:"20px"}} href="https://www.google.com/maps/dir//DIRECCION+cafe+madre/@-38.7186808,-62.3059703,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x95edbd007363273b:0x236c527b644bb0b!2m2!1d-62.264685!2d-38.718755?entry=ttu" target="_blank">{Location} Alsina 23</a>
+          </div>
+          <div className="btnEnter2">
+            
+          <a  className="Btn2" href="https://www.google.com/maps/dir//DIRECCION+cafe+madre/@-38.7186808,-62.3059703,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x95edbd007363273b:0x236c527b644bb0b!2m2!1d-62.264685!2d-38.718755?entry=ttu" target="_blank"/>
           </div>
    
-  
+
         </div>
         <Link to="/Comander" className="buttonComander">
               Ir a Comander

@@ -98,8 +98,16 @@
   gap: 1rem;
   align-items: center;
 }
+.btnEnter2 {
+  margin-bottom: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+}
 
-.Btn {
+.Btn2 {
   width: 140px;
   height: 40px;
   border: none;
@@ -126,9 +134,9 @@
   margin-top: 2rem;
 }
 
-.Btn::before {
+.Btn2::before {
   position: absolute;
-  content: "Ver Carta";
+  content: "Alsina 23";
   color: #ffd277;
   display: flex;
   align-items: center;
@@ -140,7 +148,49 @@
   background-color: rgba(0, 0, 0, 0.842);
   background-size: 200%;
 }
+.Btn {
+  width: 180px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(
+    to right,
+    #77530a,
+    #ffd277,
+    #77530a,
+    #77530a,
+    #ffd277,
+    #77530a
+  );
+  background-size: 250%;
+  background-position: left;
+  color: #ffd277;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition-duration: 1s;
+  overflow: hidden;
+  margin-top: 2rem;
+  font-size: 18px; /* Ajusta el tamaño del texto según tu preferencia */
+}
 
+.Btn::before {
+  position: absolute;
+  content: "Ver Carta";
+  color: #ffd277;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 90%;
+  border-radius: 8px;
+  transition-duration: 1s;
+  background-color: rgba(0, 0, 0, 0.842);
+  background-size: 200%;
+  font-size: 1.2em; /* Ajusta el tamaño del texto según tu preferencia */
+}
 .Btn:hover {
   background-position: right;
   transition-duration: 1s;
@@ -159,6 +209,7 @@
   .btnEnter {
     margin-top: 6rem;
   }
+
 
   .LandingBack {
     background-image: url("../assets/bgMadre2.png");
