@@ -91,7 +91,7 @@ border-radius: 24px; */
 @media (max-width: 600px) {
   .sectioner {
     justify-content: flex-start;
-    top: 100px;
+    top: 70px;
   }
   .leftInfo {
     padding-left: 0;

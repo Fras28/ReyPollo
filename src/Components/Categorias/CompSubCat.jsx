@@ -51,7 +51,7 @@ export const CompSubCat =  ({ idCat }) => {
     <div className="containerL">
       <Nav id={id} />
       <div className="sectioner">
-        {subCategoriasTrue.length < 1 ? (
+        {subCategoriasTrue.length > 1 ? (
           <div className="sectioner">
             {subCategoriasTrue.map((product, index) =>
               product[0] ? (
@@ -59,7 +59,7 @@ export const CompSubCat =  ({ idCat }) => {
                   key={index}
                   href={`#${product[0].attributes.sub_categoria.data.id}`}
                 >
-                  {product[0]?.attributes.sub_categoria.data.attributes.name}
+                  {">>"} {product[0]?.attributes.sub_categoria.data.attributes.name} 
                 </a>
               ) : null
             )}
