@@ -6,8 +6,8 @@ export const MyFoot = () => {
     <footer className="Mfooty animate__animated  animate__zoomIn">
       <a href="https://morton-solutions.vercel.app/" target="_blank" >
         <svg
-          width="210"
-          height="13"
+          width="250"
+          height="20"
           viewBox="0 0 210 13"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
