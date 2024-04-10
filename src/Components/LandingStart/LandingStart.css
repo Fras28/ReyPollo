@@ -16,6 +16,11 @@
   justify-content: space-between;
 }
 
+.contAlerStart{
+  padding-top: 15rem;
+}
+
+
 .marcaLanging {
   /* background-color: rgba(255, 255, 255, 0.541); */
   padding: 1rem;
@@ -225,5 +230,9 @@
   }
   .BottomLanding {
     padding-bottom: 5rem;
+  }
+
+  .contAlerStart{
+    padding-top: 5rem;
   }
 }
