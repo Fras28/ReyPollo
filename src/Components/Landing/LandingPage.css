@@ -75,7 +75,11 @@ color: whitesmoke;
 .naviTit3{
   display:flex ;
   font-weight: 600;
-  color: black;
+  color: orange;
+  background-color: #3E593A;
+  padding: .5rem;
+  border: solid white 3px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   }
 .titCasa {
   display: flex;
