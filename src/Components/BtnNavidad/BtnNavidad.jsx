@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
-import Logo from "../assets/Logo.png"
+import Logo from "../assets/Logo.png";
 import "./BtnNavidad.css";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -34,7 +34,6 @@ export default function AlertDialogSlide() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-          
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
@@ -53,17 +52,33 @@ export default function AlertDialogSlide() {
       >
         <DialogTitle className="infoNavi">
           <div>
-         <img src={Logo} alt="logo Coqui Cakes" width="100px" />
+            <img src={Logo} alt="logo Coqui Cakes" width="100px" />
           </div>
-          <div style={{marginLeft:"30%"}}>
-          <button className="exit" onClick={handleClose}>
-            x
-          </button>
+          <div style={{ marginLeft: "30%" }}>
+            <button className="exit" onClick={handleClose}>
+              x
+            </button>
           </div>
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-          En el Rey del Pollo te brindaremos la mejor atencion y calidad de nuestros productos, te esperamos para conocernos y disfrutar de la mas rica elaboracion 😃
+            Madre 🤍 Brunch & Cafe. <br /> Espacio pet friendly 🐕🐈 Cafetería
+            tradicional ☕️🥐
+            <br />
+            <br />
+            <div style={{ textAlign: "center" }}>
+              <b
+                style={{
+                  color: "green",
+                  textAlign: "center",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                DESAYUNO Y MERIENDA LIBRE
+              </b>{" "}
+              <br />
+              - 08:30 a 10:30hs -<br />- 17:00 a 19:00hs -
+            </div>
           </DialogContentText>
         </DialogContent>
         <DialogActions> </DialogActions>
