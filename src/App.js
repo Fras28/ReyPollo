@@ -38,10 +38,7 @@ function App() {
     if (!isEffectExecuted) {
       // Ejecutar la lógica solo una vez al inicio de la aplicación
       console.log("Effect is running");
-      dispatch(asyncAllProducts());
       dispatch(asyncComercio());
-      dispatch(asyncSubCategorias());
-      dispatch(asyncCategorias());
       dispatch(asyncUser());
       // Aquí colocas tu lógica de carga de datos
       setIsEffectExecuted(true); // Marcar el efecto como ejecutado
