@@ -4,7 +4,7 @@ import { Card } from "./Card/Card";
 import "./Cards.css";
 
 export const Cards = ({ products }) => {
-  // console.log(products[0]?.attributes, "que llega a la card");
+  console.log(products, "que llega a la card");
   return (
     <div className="carta" >
       <h2 className="titleSection">

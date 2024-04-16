@@ -60,7 +60,8 @@ function App() {
         {categorias.map((cat) => (
           <Route
             exact
-            path={`/:id/Landing/${cat.attributes.name}`}
+            path={`/:id/Landing/:category`}
+            key={cat.id}
             render={(props) => <CompSubCat idCat={cat.id} {...props} />}
           />
         ))}  

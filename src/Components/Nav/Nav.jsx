@@ -33,7 +33,7 @@ const BackButton = () => {
   );
 };
 
-const Nav = () => {
+const Nav = (id) => {
   const match = useRouteMatch("/:id/Landing/:category");
 
   return (
