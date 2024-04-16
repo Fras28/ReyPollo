@@ -13,26 +13,23 @@ import { asyncSubCategoria } from "../redux/slice.jsx";
 
 const API = process.env.REACT_APP_API_STRAPI;
 
-export const CompSubCat =  ({ idCat }) => {
-
+export const CompSubCat = ({ idCat }) => {
   const { id } = useParams(); // Usa el hook useParams para obtener el parámetro de la URL
-
-console.log(idCat, "id de la categoria en la que estamos ");
-
   const dispatch = useDispatch();
-  const { allProduct,subCategorias } = useSelector((state) => state.alldata);
+  const { allProduct, subCategorias } = useSelector((state) => state.alldata);
 
   useEffect(() => {
     // Función que se ejecutará cuando el componente se monte o cuando id cambie
     dispatch(asyncSubCategoria(idCat));
   }, [dispatch, id]); // Dependencias: dispatch y id
 
+  const articulosParaFiltrar = subCategorias.filter((e) => e.id === idCat);
+  const articulos =
+    articulosParaFiltrar.length > 0
+      ? articulosParaFiltrar[0].attributes.sub_categorias.data
+      : [];
 
-  const articulosParaFiltrar = subCategorias.filter(e => e.id === idCat);
-  const articulos = articulosParaFiltrar.length > 0 ? articulosParaFiltrar[0].attributes.sub_categorias.data : [];
-  
-  console.log(articulos, "en busca de solo las subs para mapear");
-  
+  console.log(articulos, "eesto es articulos ?");
 
   const Productos = allProduct?.filter(
     (e) => e.attributes?.categorias?.data.id === idCat
@@ -56,21 +53,16 @@ console.log(idCat, "id de la categoria en la que estamos ");
     return subCategoriaFilters[key];
   });
 
-  const subCategoriasTrue = subCategoriaFilters.filter((e) => e[0]);
-
   return (
     <div className="containerL">
-      <Nav id={id}/>
+      <Nav id={id} />
       <div className="sectioner">
-        {articulos?.length > 1 ? (
+        {articulos?.length > 0 ? (
           <div className="sectioner">
             {articulos?.map((product, index) =>
               product ? (
-                <a
-                  key={index}
-                  href={`#${product.id}`}
-                >
-                  {">>"} {product?.attributes.name} 
+                <a key={index} href={`#${product.id}`}>
+                  {">>"} {product?.attributes.name}
                 </a>
               ) : null
             )}
@@ -78,8 +70,24 @@ console.log(idCat, "id de la categoria en la que estamos ");
         ) : null}
       </div>
       <div className="conteinerLC ">
-        <div className="conteinerLB2 animate__animated  animate__zoomIn animate__faster">
-          {articulos?.map((product) =>
+        {articulos?.length > 0 ? (
+          <div className="conteinerLB2 animate__animated  animate__zoomIn animate__faster">
+            <div className="conteinerLB2 animate__animated animate__zoomIn animate__faster">
+              {articulos?.map((prod) => (
+                <Cards products={prod} />
+              ))}
+            </div>
+          </div>
+        ) : null}
+        {articulos.length === 0 ? <Spinner imageUrl={Logo} /> : null}
+      </div>
+      <VerPedido id={id} />
+    </div>
+  );
+};
+
+{
+  /* {articulos?.map((product) =>
             product[0] ? (
               <div
                 id={product.id}
@@ -102,14 +110,7 @@ console.log(idCat, "id de la categoria en la que estamos ");
                     className="ImgSubCat"
                   />
                 ) : null}
-                <Cards products={product} />
               </div>
             ) : null
-          )}
-        </div>
-        {/* {allProduct.length === 0 ? <Spinner imageUrl={Logo} /> : null} */}
-      </div>
-      <VerPedido id={id} />
-    </div>
-  );
-};
+          )} */
+}

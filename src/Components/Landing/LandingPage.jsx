@@ -57,7 +57,7 @@ export default function LandingPage(url) {
       to={
         url.location.pathname === "/"
           ? `/${categoria.attributes?.name}`
-          : `${url.location.pathname}/${categoria.attributes?.name}`
+          : `${url.location.pathname}/${categoria.attributes.name}`
       }
     >
       <div className={`titInicio ${index === comercio.length - 1 && index % 2 === 0 ? 'fullWidth' : ''}`}>

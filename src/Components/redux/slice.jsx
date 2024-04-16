@@ -248,13 +248,13 @@ export const asyncCategorias = () => {
 
 
 export const asyncSubCategoria = (id) => {
-  console.log(API_2+id+ "?populate=sub_categorias.articulos","?populate=sub_categorias.articulos");
+
   return async function (dispatch) {
     try {
       const response = await axios.get(API_2+id+"?populate=sub_categorias.articulos");
 
       const subCategorias = response.data.data;
-      console.log(subCategorias, " esto es subcategorias dentro de asyncsubcat");
+
 
       return dispatch(allSubCategorias(subCategorias));
     } catch (error) {

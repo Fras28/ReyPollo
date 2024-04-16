@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { asyncCancelFav, asyncfavProducts } from "../../redux/slice";
 import "./Card.css";
 
@@ -14,7 +13,8 @@ export const Card = ({ producto }) => {
   const product = producto.attributes
   const thisFav = favProd?.filter((e) => e.attributes.name === product.name);
 
-
+  
+  console.log(producto, " esto es procuto de Card");
   let artAdd = function addArticle(e) {
     // e.preventDefault()
     setArticles({
