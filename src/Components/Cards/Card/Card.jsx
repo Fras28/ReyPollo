@@ -13,8 +13,7 @@ export const Card = ({ producto }) => {
   const product = producto.attributes
   const thisFav = favProd?.filter((e) => e.attributes.name === product.name);
 
-  
-  console.log(producto, " esto es procuto de Card");
+
   let artAdd = function addArticle(e) {
     // e.preventDefault()
     setArticles({

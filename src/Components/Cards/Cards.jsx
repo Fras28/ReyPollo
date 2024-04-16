@@ -4,10 +4,7 @@ import { Card } from "./Card/Card";
 import "./Cards.css";
 
 export const Cards = ({ products }) => {
-  console.log(
-    products.attributes.articulos.data.length,
-    "llegar a los articulos"
-  );
+
   const loguitoSection = (
     <svg
       width="30"

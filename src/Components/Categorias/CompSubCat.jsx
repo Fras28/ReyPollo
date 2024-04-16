@@ -29,7 +29,6 @@ export const CompSubCat = ({ idCat }) => {
       ? articulosParaFiltrar[0].attributes.sub_categorias.data
       : [];
 
-  console.log(articulos, "eesto es articulos ?");
 
   const Productos = allProduct?.filter(
     (e) => e.attributes?.categorias?.data.id === idCat
@@ -52,7 +51,7 @@ export const CompSubCat = ({ idCat }) => {
   const dynamicVariables = Object.keys(subCategoriaFilters).map((key) => {
     return subCategoriaFilters[key];
   });
-
+console.log(articulos[0].attributes.articulos.data.length);
   return (
     <div className="containerL">
       <Nav id={id} />
@@ -60,7 +59,7 @@ export const CompSubCat = ({ idCat }) => {
         {articulos?.length > 0 ? (
           <div className="sectioner">
             {articulos?.map((product, index) =>
-              product ? (
+              product.attributes.articulos.data.length != 0 ? (
                 <a key={index} href={`#${product.id}`}>
                   {">>"} {product?.attributes.name}
                 </a>
