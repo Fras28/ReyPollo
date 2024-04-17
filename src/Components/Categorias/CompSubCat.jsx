@@ -51,7 +51,7 @@ export const CompSubCat = ({ idCat }) => {
   const dynamicVariables = Object.keys(subCategoriaFilters).map((key) => {
     return subCategoriaFilters[key];
   });
-console.log(articulos[0].attributes.articulos.data.length);
+console.log(articulos,"buscando id de sub categoria");
   return (
     <div className="containerL">
       <Nav id={id} />
@@ -73,7 +73,11 @@ console.log(articulos[0].attributes.articulos.data.length);
           <div className="conteinerLB2 animate__animated  animate__zoomIn animate__faster">
             <div className="conteinerLB2 animate__animated animate__zoomIn animate__faster">
               {articulos?.map((prod) => (
-                <Cards products={prod} />
+                <div >
+                  <div id={prod.id} style={{height:"110px"}}></div>
+              
+                  <Cards products={prod} />
+                </div>
               ))}
             </div>
           </div>
@@ -84,32 +88,3 @@ console.log(articulos[0].attributes.articulos.data.length);
     </div>
   );
 };
-
-{
-  /* {articulos?.map((product) =>
-            product[0] ? (
-              <div
-                id={product.id}
-                key={product.id}
-                style={{ paddingTop: "6rem" }}
-              >
-                {product[0]?.attributes?.sub_categoria?.data?.attributes
-                  ?.picture?.data?.attributes?.url ? (
-                  <img
-                    src={
-                      `${API}${product[0]?.attributes?.sub_categoria?.data?.attributes?.picture?.data?.attributes?.url}` ||
-                      Logo
-                    }
-                    alt={
-                      "img - " +
-                      product[0]?.attributes?.sub_categoria?.data?.attributes
-                        ?.name
-                    }
-                    id={product[0]?.attributes?.sub_categoria?.data?.id}
-                    className="ImgSubCat"
-                  />
-                ) : null}
-              </div>
-            ) : null
-          )} */
-}
