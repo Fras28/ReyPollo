@@ -11,16 +11,8 @@ import Spinner from "../assets/Spinner/Spinner";
 import Horarios from "../BtnNavidad/Horarios";
 
 export default function LandingPage(url) {
-  const dispatch = useDispatch();
   const { comercio, categorias } = useSelector((state) => state.alldata);
-
   const API = process.env.REACT_APP_API_STRAPI;
-  console.log(
-    API.concat(
-      categorias[0].attributes.picture.data.attributes.formats.small.url
-    ),
-    "en busca de la imagen"
-  );
   const id = url.location.pathname.slice(1, 3);
   return (
     <div className="animate__animated  animate__zoomIn">
@@ -62,7 +54,7 @@ export default function LandingPage(url) {
               to={
                 url.location.pathname === "/"
                   ? `/${categoria.attributes?.name}`
-                  : `${url.location.pathname}/${categoria.attributes.name}`
+                  : `${url?.location?.pathname}/${categoria?.attributes?.name}`
               }
             >
               <div
