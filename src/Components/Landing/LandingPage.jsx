@@ -12,14 +12,19 @@ import Horarios from "../BtnNavidad/Horarios";
 
 export default function LandingPage(url) {
   const dispatch = useDispatch();
-  const { comercio,categorias } = useSelector((state) => state.alldata);
+  const { comercio, categorias } = useSelector((state) => state.alldata);
 
-
- 
+  const API = process.env.REACT_APP_API_STRAPI;
+  console.log(
+    API.concat(
+      categorias[0].attributes.picture.data.attributes.formats.small.url
+    ),
+    "en busca de la imagen"
+  );
   const id = url.location.pathname.slice(1, 3);
   return (
     <div className="animate__animated  animate__zoomIn">
-      {!categorias? <Spinner imageUrl={Logo} /> : null}
+      {!categorias ? <Spinner imageUrl={Logo} /> : null}
       <div className="naviLanding titCasa ">
         <div className="logoL">
           <NavLink to={`/${id}`}>
@@ -50,26 +55,36 @@ export default function LandingPage(url) {
       </div>
 
       <div className="conteinerLB2  ">
-      <div className="rowsCardL">
-  {categorias?.map((categoria, index) => (
-    <NavLink
-      className={`navLink `}
-      to={
-        url.location.pathname === "/"
-          ? `/${categoria.attributes?.name}`
-          : `${url.location.pathname}/${categoria.attributes.name}`
-      }
-    >
-      <div className={`titInicio ${index === comercio.length - 1 && index % 2 === 0 ? 'fullWidth' : ''}`}>
-        <img
-          src={categoria?.attributes?.picture?.data || Logo}
-          alt="fotito"
-        />
-        <p>{categoria?.attributes?.name}</p>
-      </div>
-    </NavLink>
-  ))}
-</div>
+        <div className="rowsCardL">
+          {categorias?.map((categoria, index) => (
+            <NavLink
+              className={`navLink `}
+              to={
+                url.location.pathname === "/"
+                  ? `/${categoria.attributes?.name}`
+                  : `${url.location.pathname}/${categoria.attributes.name}`
+              }
+            >
+              <div
+                className={`titInicio ${
+                  index === comercio.length - 1 && index % 2 === 0
+                    ? "fullWidth"
+                    : ""
+                }`}
+              >
+                <img
+                  src={categoria?.attributes?.picture?.data != null ?
+                    API +
+                      categoria?.attributes?.picture?.data?.attributes?.formats
+                        ?.small?.url : Logo
+                  }
+                  alt="fotito"
+                />
+                <p>{categoria?.attributes?.name}</p>
+              </div>
+            </NavLink>
+          ))}
+        </div>
       </div>
       <div className="navi2">
         <svg
