@@ -49,7 +49,7 @@ export const Inicio = (url) => {
     >
       <div className="landingStart">
       
-<div style={{width:"100%"}}> <p className="titleSection" style={{justifyContent:"center", outline:"solid white 2px", border:"none"}} >{comercio?.attributes?.msjInicio || 'Consulta por nuestros desayunos y meriendas libres'}</p> </div>
+<div style={{width:"100%"}}> <p className="titleSection" style={{justifyContent:"center", outline:"solid white 2px", border:"none"}} >{comercio?.attributes?.msjInicio || 'Consulta por nuestras ofertas y promociones'}</p> </div>
         <div className="BottomLanding">
           <div  className="contAlerStart">
             <AlertDialogSlide />
@@ -63,7 +63,7 @@ export const Inicio = (url) => {
           </div>
           <div className="btnEnter2">
             
-          <a  className="Btn2" href="https://www.google.com/maps/dir//DIRECCION+cafe+madre/@-38.7186808,-62.3059703,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x95edbd007363273b:0x236c527b644bb0b!2m2!1d-62.264685!2d-38.718755?entry=ttu" target="_blank"/>
+          <a  className="Btn2"   href="https://www.google.com/maps/place/Zapiola+69,+B8000CLA+Bah%C3%ADa+Blanca,+Provincia+de+Buenos+Aires/@-38.7136159,-62.2620106,17z/data=!3m1!4b1!4m6!3m5!1s0x95eda3532f3fcf3d:0xc3ed006645e95e9c!8m2!3d-38.7136159!4d-62.2620106!16s%2Fg%2F11f6kymq4s?entry=ttu" target="_blank"/>
           </div>
    
 

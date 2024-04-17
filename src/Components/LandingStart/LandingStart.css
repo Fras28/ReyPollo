@@ -1,4 +1,5 @@
 .LandingBack {
+
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -141,7 +142,7 @@
 
 .Btn2::before {
   position: absolute;
-  content: "Alsina 23";
+  content: " Zapiola 69";
   color: #ffd277;
   display: flex;
   align-items: center;
@@ -212,7 +213,7 @@
 
 @media (max-width: 600px) {
   .btnEnter {
-    margin-top: 6rem;
+    margin-top: 4rem;
   }
 
 .buttonComander{
@@ -220,7 +221,7 @@
   display: none;
 }
   .LandingBack {
-    background-image: url("../assets/bgMadre2.png");
+    background-image: url("../assets/bgReyDelPollo.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -233,6 +234,6 @@
   }
 
   .contAlerStart{
-    padding-top: 5rem;
+    padding-top: 8rem;
   }
 }
