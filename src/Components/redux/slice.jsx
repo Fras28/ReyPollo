@@ -42,15 +42,25 @@ export const dataSlice = createSlice({
     },
 
     allSubCategorias: (state, action) => {
+      // Verificar si el objeto de la carga útil ya existe en el estado
+      const isExisting = state.subCategorias.some(subCategoria => subCategoria.id === action.payload.id);
+    
+      // Si el objeto ya existe, no hacemos nada
+      if (isExisting) {
+        return state;
+      }
+    
+      // Si el objeto no existe, lo agregamos al estado
       return {
         ...state,
-        subCategorias: action.payload,
+        subCategorias: [...state.subCategorias, action.payload],
       };
     },
     fillComercio: (state, action) => {
       return {
         ...state,
         comercio: action.payload,
+        categorias: action.payload.attributes.categorias.data,
       };
     },
     favProducts: (state, action) => {
@@ -151,8 +161,9 @@ const IDENTIFIERU = process.env.REACT_APP_IDENTIFIER;
 const PASSWORDU = process.env.REACT_APP_PASSWORD;
 const API_SUBCAT= process.env.REACT_APP_API_STRAPI_SUBCATEGORIAS;
 const API_GENERAL = process.env.REACT_APP_API_STRAPI;
-const MADRE_MAIL = process.env.REACT_APP_API_MAIL
-const MADRE_PASS = process.env.REACT_APP_MADREPASS;
+const API_INICIO = process.env.REACT_APP_API_INICIO
+const API_2  = process.env.REACT_APP_API_CATEGORIA;
+
 
 
 const comercio = 2;
@@ -211,13 +222,10 @@ export const asyncAllProducts = () => {
 export const asyncComercio = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(API_COMERCIO);
-      const comercioFiltrado = response.data.data.find(comercioData => comercioData.id === comercio); // Buscar el comercio con el id igual al valor de la constante comercio
-      if (comercioFiltrado) {
-        return dispatch(fillComercio(comercioFiltrado));
-      } else {
-        console.error("No se encontró el comercio con el ID especificado.");
-      }
+      const response = await axios.get(API_INICIO);
+
+        return dispatch(fillComercio(response.data.data));
+    
     } catch (error) {
       console.error("Error fetching data comercio:", error);
     }
@@ -236,6 +244,25 @@ export const asyncCategorias = () => {
     }
   };
 };
+
+
+
+export const asyncSubCategoria = (id) => {
+
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(API_2+id+"?populate=sub_categorias.articulos");
+
+      const subCategorias = response.data.data;
+
+
+      return dispatch(allSubCategorias(subCategorias));
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+};
+
 
 
 

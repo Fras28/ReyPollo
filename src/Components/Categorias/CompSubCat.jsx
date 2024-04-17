@@ -9,18 +9,25 @@ import { VerPedido } from "../BtnBag/BtnBag.jsx";
 import Spinner from "../assets/Spinner/Spinner.jsx";
 import Logo from "../assets/Logo.png";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min.js";
+import { asyncSubCategoria } from "../redux/slice.jsx";
 
 const API = process.env.REACT_APP_API_STRAPI;
 
-export const CompSubCat =  ({ idCat }) => {
-
+export const CompSubCat = ({ idCat }) => {
   const { id } = useParams(); // Usa el hook useParams para obtener el parámetro de la URL
-
-
-
   const dispatch = useDispatch();
-  const { allProduct } = useSelector((state) => state.alldata);
+  const { allProduct, subCategorias } = useSelector((state) => state.alldata);
 
+  useEffect(() => {
+    // Función que se ejecutará cuando el componente se monte o cuando id cambie
+    dispatch(asyncSubCategoria(idCat));
+  }, [dispatch, id]); // Dependencias: dispatch y id
+
+  const articulosParaFiltrar = subCategorias.filter((e) => e.id === idCat);
+  const articulos =
+    articulosParaFiltrar.length > 0
+      ? articulosParaFiltrar[0].attributes.sub_categorias.data
+      : [];
 
 
   const Productos = allProduct?.filter(
@@ -44,22 +51,17 @@ export const CompSubCat =  ({ idCat }) => {
   const dynamicVariables = Object.keys(subCategoriaFilters).map((key) => {
     return subCategoriaFilters[key];
   });
-
-  const subCategoriasTrue = subCategoriaFilters.filter((e) => e[0]);
-
+console.log(articulos,"buscando id de sub categoria");
   return (
     <div className="containerL">
       <Nav id={id} />
       <div className="sectioner">
-        {subCategoriasTrue.length > 1 ? (
+        {articulos?.length > 0 ? (
           <div className="sectioner">
-            {subCategoriasTrue.map((product, index) =>
-              product[0] ? (
-                <a
-                  key={index}
-                  href={`#${product[0].attributes.sub_categoria.data.id}`}
-                >
-                  {">>"} {product[0]?.attributes.sub_categoria.data.attributes.name} 
+            {articulos?.map((product, index) =>
+              product.attributes.articulos.data.length != 0 ? (
+                <a key={index} href={`#${product.id}`}>
+                  {">>"} {product?.attributes.name}
                 </a>
               ) : null
             )}
@@ -67,36 +69,20 @@ export const CompSubCat =  ({ idCat }) => {
         ) : null}
       </div>
       <div className="conteinerLC ">
-        <div className="conteinerLB2 animate__animated  animate__zoomIn animate__faster">
-          {subCategoriasTrue?.map((product) =>
-            product[0] ? (
-              <div
-                id={product[0]?.attributes?.sub_categoria?.data?.id}
-                key={product[0]?.attributes?.sub_categoria?.data?.id}
-                style={{ paddingTop: "6rem" }}
-              >
-                {product[0]?.attributes?.sub_categoria?.data?.attributes
-                  ?.picture?.data?.attributes?.url ? (
-                  <img
-                    src={
-                      `${API}${product[0]?.attributes?.sub_categoria?.data?.attributes?.picture?.data?.attributes?.url}` ||
-                      Logo
-                    }
-                    alt={
-                      "img - " +
-                      product[0]?.attributes?.sub_categoria?.data?.attributes
-                        ?.name
-                    }
-                    id={product[0]?.attributes?.sub_categoria?.data?.id}
-                    className="ImgSubCat"
-                  />
-                ) : null}
-                <Cards products={product} />
-              </div>
-            ) : null
-          )}
-        </div>
-        {allProduct.length === 0 ? <Spinner imageUrl={Logo} /> : null}
+        {articulos?.length > 0 ? (
+          <div className="conteinerLB2 animate__animated  animate__zoomIn animate__faster">
+            <div className="conteinerLB2 animate__animated animate__zoomIn animate__faster">
+              {articulos?.map((prod) => (
+                <div >
+                  <div id={prod.id} style={{height:"110px"}}></div>
+              
+                  <Cards products={prod} />
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : null}
+        {articulos.length === 0 ? <Spinner imageUrl={Logo} /> : null}
       </div>
       <VerPedido id={id} />
     </div>

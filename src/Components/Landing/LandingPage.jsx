@@ -6,40 +6,17 @@ import Logo from "../assets/Logo.png";
 import { VerPedido } from "../BtnBag/BtnBag";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  asyncAllProducts,
-  asyncCategorias,
-  asyncComercio,
-} from "../redux/slice";
+
 import Spinner from "../assets/Spinner/Spinner";
 import Horarios from "../BtnNavidad/Horarios";
 
 export default function LandingPage(url) {
-  const dispatch = useDispatch();
-  const { categorias } = useSelector((state) => state.alldata);
-  useEffect(() => {
-    const fetchData = () => {
-      console.log("Effect is running LandingPage");
-      dispatch(asyncCategorias());
-    };
-
-    // Ejecutar la función inmediatamente al montar el componente
-    fetchData();
-
-    // Configurar la repetición cada 15 minutos
-    const intervalId = setInterval(fetchData, 15 * 60 * 1000); // 15 minutos en milisegundos
-
-    // Limpiar el intervalo al desmontar el componente para evitar fugas de memoria
-    return () => clearInterval(intervalId);
-  }, [dispatch]);
-
-  const categoriasConProductos = categorias?.filter(
-    (categoria) => categoria.attributes?.articulos?.data?.length > 0
-  );
+  const { comercio, categorias } = useSelector((state) => state.alldata);
+  const API = process.env.REACT_APP_API_STRAPI;
   const id = url.location.pathname.slice(1, 3);
   return (
     <div className="animate__animated  animate__zoomIn">
-      {categorias.length === 0 ? <Spinner imageUrl={Logo} /> : null}
+      {!categorias ? <Spinner imageUrl={Logo} /> : null}
       <div className="naviLanding titCasa ">
         <div className="logoL">
           <NavLink to={`/${id}`}>
@@ -70,26 +47,36 @@ export default function LandingPage(url) {
       </div>
 
       <div className="conteinerLB2  ">
-      <div className="rowsCardL">
-  {categoriasConProductos?.map((categoria, index) => (
-    <NavLink
-      className={`navLink `}
-      to={
-        url.location.pathname === "/"
-          ? `/${categoria.attributes?.name}`
-          : `${url.location.pathname}/${categoria.attributes?.name}`
-      }
-    >
-      <div className={`titInicio ${index === categoriasConProductos.length - 1 && index % 2 === 0 ? 'fullWidth' : ''}`}>
-        <img
-          src={categoria?.attributes?.picture?.data || Logo}
-          alt="fotito"
-        />
-        <p>{categoria?.attributes?.name}</p>
-      </div>
-    </NavLink>
-  ))}
-</div>
+        <div className="rowsCardL">
+          {categorias?.map((categoria, index) => (
+            <NavLink
+              className={`navLink `}
+              to={
+                url.location.pathname === "/"
+                  ? `/${categoria.attributes?.name}`
+                  : `${url?.location?.pathname}/${categoria?.attributes?.name}`
+              }
+            >
+              <div
+                className={`titInicio ${
+                  index === comercio.length - 1 && index % 2 === 0
+                    ? "fullWidth"
+                    : ""
+                }`}
+              >
+                <img
+                  src={categoria?.attributes?.picture?.data != null ?
+                    API +
+                      categoria?.attributes?.picture?.data?.attributes?.formats
+                        ?.small?.url : Logo
+                  }
+                  alt="fotito"
+                />
+                <p>{categoria?.attributes?.name}</p>
+              </div>
+            </NavLink>
+          ))}
+        </div>
       </div>
       <div className="navi2">
         <svg

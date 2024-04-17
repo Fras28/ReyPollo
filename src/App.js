@@ -29,26 +29,21 @@ function App() {
   const { allProduct, favProd, categorias, comercio } = useSelector(
     (state) => state.alldata
   );
-  
+
   // Determina si alguno de los estados relevantes ha cambiado
   const [isEffectExecuted, setIsEffectExecuted] = useState(false);
-  
+
   useEffect(() => {
     // Verificar si el efecto ya se ha ejecutado
     if (!isEffectExecuted) {
       // Ejecutar la lógica solo una vez al inicio de la aplicación
       console.log("Effect is running");
-      dispatch(asyncAllProducts());
       dispatch(asyncComercio());
-      dispatch(asyncSubCategorias());
-      dispatch(asyncCategorias());
       dispatch(asyncUser());
       // Aquí colocas tu lógica de carga de datos
       setIsEffectExecuted(true); // Marcar el efecto como ejecutado
     }
   }, [isEffectExecuted]); // Dependencia: isEffectExecuted
-
-  
 
   const toTop = () => {
     window.scrollTo(0, 0);
@@ -57,21 +52,18 @@ function App() {
   return (
     <div className="App">
       <Switch>
-      <Route exact path="/Comander" component={AdminPanel}/>
+        <Route exact path="/Comander" component={AdminPanel} />
         <Route exact path="/:id?" component={Inicio} />
         <Route exact path="/:id/Landing" component={LandingPage} />
         {categorias.map((cat) => (
           <Route
             exact
-            path={`/:id/Landing/${cat.attributes.name}`}
+            path={`/:id/Landing/${cat?.attributes?.name}`}
+            key={cat.id}
             render={(props) => <CompSubCat idCat={cat.id} {...props} />}
           />
-        ))}  
-        <Route
-          exact
-          path="/:id/Landing/Comander"
-          component={AdminPanel}
-        />
+        ))}
+        <Route exact path="/:id/Landing/Comander" component={AdminPanel} />
         <Route exact path="/:id/bag" component={BagXX} />
       </Switch>
       <Foot />

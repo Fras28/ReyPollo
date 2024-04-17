@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { asyncCancelFav, asyncfavProducts } from "../../redux/slice";
 import "./Card.css";
 
